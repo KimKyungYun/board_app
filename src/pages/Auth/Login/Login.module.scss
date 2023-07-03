@@ -1,4 +1,4 @@
-@use "src/utils/styles/mediaQuery";
+@use "src/utils/styles/mediaQuery" as media;
 
 .content {
   display: flex;
@@ -48,7 +48,7 @@
   &__login {
     width: 350px;
     height: 40px;
-    border-radius:20px;
+    border-radius: 20px;
     margin-top: 20px;
     border: none;
     background-color: #c4c4c4;

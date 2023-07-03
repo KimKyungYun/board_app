@@ -4,13 +4,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   min-height: 100vh;
 }
 
-.list {
+.board {
+  padding: 0;
   width: 80%;
   height: 80vh;
   display: flex;
+  flex-direction: column;
   border: 1px solid black;
+
+  @include media.media-breakpoint-down(mobile) {
+    width: 375px;
+  }
+  &__list {
+    padding: 0;
+  }
 }

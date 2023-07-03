@@ -1,5 +1,4 @@
 import styles from './Login.module.scss';
-import {useState} from 'react';
 import AuthDetail from '../../../components/Auth/AuthDetail';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ export default function Login(){
       <div className={styles.form}>
       <form className={styles.loginform}>
         <AuthDetail name='로그인하기' first='게시판에 게시글을 작성하시려면' second='로그인하세요'/>
-        {}
+        
         <input type="text" placeholder='아이디' className={styles.loginform__input}/>
         <input type="text" placeholder='비밀번호' className={styles.loginform__input}/>
         <div className={styles.loginform__signup}>
