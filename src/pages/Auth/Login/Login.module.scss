@@ -1,0 +1,58 @@
+@use "src/utils/styles/mediaQuery";
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form {
+  width: 368px;
+}
+
+.loginform {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__input {
+    width: 350px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 8px 0;
+    padding-left: 16px;
+    border: none;
+    background-color: #eeeeee;
+    font-size: 16px;
+
+    &:focus {
+      outline: 2px solid #99ccff;
+    }
+    &::placeholder {
+      color: #c4c4c4;
+    }
+  }
+
+  &__signup {
+    color: #666666;
+    font-weight: 500;
+    &--link {
+      text-decoration: none;
+      font-weight: 700;
+      color: blue;
+    }
+  }
+
+  &__login {
+    width: 350px;
+    height: 40px;
+    border-radius:20px;
+    margin-top: 20px;
+    border: none;
+    background-color: #c4c4c4;
+    color: #ffffff;
+    font-size: 16px;
+  }
+}

@@ -1,7 +1,8 @@
-function Home(){
+import styles from './Home.module.scss';
+export default function Home(){
   return(
-    <div>
-      hihi
+    <div className={styles.home}>
+      메인
     </div>
   )
 }

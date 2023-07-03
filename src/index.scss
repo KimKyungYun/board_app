@@ -1,0 +1,39 @@
+@forward "src/styles/fonts.scss";
+@use "src/utils/styles/mediaQuery" as media;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  font-family:
+    SUIT,
+    system-ui,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+body {
+  min-height: 100vh;
+  min-width: 1148px;
+}
+
+button {
+  font-family: SUIT, system-ui;
+}
+
+input {
+  font-family: SUIT, system-ui;
+
+  &::placeholder {
+    font-family: SUIT, system-ui;
+  }
+}
