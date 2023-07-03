@@ -10,10 +10,6 @@
   align-items: center;
   background-color: #99ccff;
 
-  @include media.media-breakpoint-down(mobile) {
-    width: 216px;
-  }
-  
   &__logo {
     display: flex;
   }
