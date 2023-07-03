@@ -1,4 +1,4 @@
-@use "src/utils/styles/mediaQuery";
+@use "src/utils/styles/mediaQuery" as media;
 
 .navbar {
   width: 100%;
@@ -10,6 +10,10 @@
   align-items: center;
   background-color: #99ccff;
 
+  @include media.media-breakpoint-down(mobile) {
+    width: 216px;
+  }
+  
   &__logo {
     display: flex;
   }
@@ -18,7 +22,7 @@
     width: 60px;
     margin-left: 30px;
   }
-  
+
   &__links {
     display: flex;
     justify-content: flex-end;
@@ -33,5 +37,4 @@
     text-decoration: none;
     color: #222222;
   }
-
 }

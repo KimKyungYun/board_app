@@ -1,0 +1,16 @@
+@use "src/utils/styles/mediaQuery" as media;
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.list {
+  width: 80%;
+  height: 80vh;
+  display: flex;
+  border: 1px solid black;
+}

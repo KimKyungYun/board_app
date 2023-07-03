@@ -4,14 +4,8 @@ $media: (
   mobile: 576px,
 );
 
-@mixin media-breakpoint-down($name, $breakpoints: $media) {
-  $max: breakpoint-max($name, $breakpoints);
-
-  @if $max {
-    @media (max-width: $max) {
-      @content;
-    }
-  } @else {
+@mixin mobile {
+  @media (max-width: 576px) {
     @content;
   }
 }
