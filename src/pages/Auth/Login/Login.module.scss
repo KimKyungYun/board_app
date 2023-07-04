@@ -69,12 +69,23 @@
     border-radius: 20px;
     margin-top: 20px;
     border: none;
-    background-color: #c4c4c4;
+    background-color: #99ccff;
     color: #ffffff;
     font-size: 16px;
+    cursor: pointer;
 
+    &:disabled {
+      background-color: #c4c4c4;
+      cursor: default;
+    }
     @include media.media-breakpoint-down(mobile) {
       width: 270px;
     }
   }
+}
+
+.error {
+  font-size: 14px;
+  color: #ff7f23;
+  white-space: pre-wrap;
 }

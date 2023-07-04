@@ -1,2 +1,20 @@
-@use "src/utlis/styles/mediaQuery" as media;
+@use "src/utils/styles/mediaQuery" as media;
 
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #666666;
+  }
+}

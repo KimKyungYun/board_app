@@ -26,9 +26,13 @@
 
   &__index {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 1fr;
-    padding: 10px;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+    padding: 10px 0;
     border-bottom: 1px solid black;
+
+    &--item {
+      text-align: center;
+    }
   }
 
   &__list {
@@ -37,10 +41,12 @@
     // border: 1px solid;
 
     &--item {
+      text-align: center;
       display: grid;
-      grid-template-columns: 1fr 3fr 1fr 1fr;
-      padding: 9px;
-      height: 26px;
+      grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+      align-items: center;
+      padding: 9px 0;
+      height: 40px;
       border-bottom: 1px solid #eeeeee;
     }
   }
