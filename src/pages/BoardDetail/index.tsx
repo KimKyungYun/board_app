@@ -1,15 +1,22 @@
 import styles from "./BoardDetail.module.scss";
-import { BoardInfo } from "api/Post/entity";
+import {useEffect,useState} from 'react';
+import { boardItem } from "store/store";
+import {useAtomValue} from 'jotai';
+// import { getBoardInfo } from "api/Post";
+// import { BoardInfo } from "api/Post/entity";
+import List from "pages/BoardList/static/entity";
+export default function BoardDetail() {
+  const id=useAtomValue(boardItem);
+  let data=List[id];
 
-export default function BoardDetail({createdAt,content,title,writer,viewcount_id,id}:BoardInfo) {
   return (
     <div className={styles.content}>
       <div className={styles.detail}>
-        <div className={styles.detail__title}>{title}</div>
-        <div className={styles.detail__id}>{writer}</div>
-        <div className={styles.detail__content}>{content}</div>
-        <div className={styles.detail__date}>{createdAt}</div>
-        <div className={styles.detail__viewcount}>{viewcount_id}</div>
+        <div className={styles.detail__title}>{data.content}</div>
+        <div className={styles.detail__id}>{data.writer}</div>
+        <div className={styles.detail__content}>{data.content}</div>
+        <div className={styles.detail__date}>{data.createdAt}</div>
+        <div className={styles.detail__viewcount}>{data.viewcount_id}</div>
       </div>
     </div>
   );

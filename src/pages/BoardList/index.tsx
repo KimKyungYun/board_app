@@ -3,12 +3,13 @@ import Pagination from 'components/common/Pagination';
 import styles from './BoardList.module.scss';
 import List from './static/entity';
 import { Link } from 'react-router-dom';
-import BoardDetail from 'pages/BoardDetail';
-
+import {useAtom} from 'jotai';
+import { boardItem } from 'store/store';
 export default function BoardList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postsPerPage] = useState<number>(10);
-
+  const [boardInfo,setBoardInfo]=useAtom(boardItem);
+  
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
 
@@ -25,8 +26,10 @@ export default function BoardList() {
         </div>
         <ul className={styles.board__list}>
           {List.slice(indexOfFirst, indexOfLast).map((item) => (
-            <Link to={{
-              pathname:`/list/detail${item.id}`
+            <Link to='/detail' onClick={()=>{
+              setBoardInfo(item.id)
+              console.log(boardInfo);
+              
             }}>
               <li className={styles['board__list--item']}>
                 <span>{item.id}</span>

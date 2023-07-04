@@ -7,17 +7,14 @@ import BoardList from './pages/BoardList';
 import Post from './pages/Post';
 import Login from './pages/Auth/Login';
 import BoardDetail from 'pages/BoardDetail';
-import { BoardInfo } from 'api/Post/entity';
-
 function App() {
-  const [data,setData]=useState<BoardInfo | null>(null)
   return (
     <Suspense fallback={<div />}>
       <TopNavigation />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<BoardList />} />
-        <Route path="/detail:boardId" element={<BoardDetail  />} />
+        <Route path="/detail" element={<BoardDetail />} />
         <Route path="/post" element={<Post />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

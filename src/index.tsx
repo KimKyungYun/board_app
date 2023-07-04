@@ -5,6 +5,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'jotai';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,11 +24,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
+    <Provider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </React.StrictMode>
+    </Provider>
   </QueryClientProvider>,
 
 );
