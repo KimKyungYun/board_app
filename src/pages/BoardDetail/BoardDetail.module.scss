@@ -1,5 +1,15 @@
 .content {
-  display: flex;
-  
+  display: flex;  
   min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail {
+  width: 90%;
+  border: 1px solid;
+
+  &__title {
+    
+  }
 }

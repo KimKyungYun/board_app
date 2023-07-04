@@ -22,13 +22,15 @@
     font-weight: 700;
     font-size: 32px;
     color: #666666;
+    margin-bottom: 10px;
   }
 
   &__index {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
     padding: 10px 0;
-    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid #c4c4c4;
 
     &--item {
       text-align: center;
@@ -38,16 +40,25 @@
   &__list {
     height: 75vh;
     list-style: none;
-    // border: 1px solid;
+    
+    &--link {
+      text-decoration: none;
+      color: #222222;
+    }
 
     &--item {
       text-align: center;
       display: grid;
       grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
       align-items: center;
-      padding: 9px 0;
-      height: 40px;
-      border-bottom: 1px solid #eeeeee;
+      padding: 8px 0;
+      height: 36px;
+      border-bottom: 1px solid #eeeeee;   
+
+      &:hover{
+        color: white;
+        background-color: #c4c4c4;
+      }
     }
   }
 }

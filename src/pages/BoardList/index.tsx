@@ -26,11 +26,7 @@ export default function BoardList() {
         </div>
         <ul className={styles.board__list}>
           {List.slice(indexOfFirst, indexOfLast).map((item) => (
-            <Link to='/detail' onClick={()=>{
-              setBoardInfo(item.id)
-              console.log(boardInfo);
-              
-            }}>
+            <Link to='/detail' className={styles['board__list--link']}onClick={()=>setBoardInfo(item.id)}>
               <li className={styles['board__list--item']}>
                 <span>{item.id}</span>
                 <span>{item.title}</span>
