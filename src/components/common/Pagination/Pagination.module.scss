@@ -1,0 +1,37 @@
+@use "src/utils/styles/mediaQuery" as media;
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: #666666;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  margin: 10px;
+
+  &__item {
+    width: 20px;
+    padding: 5px;
+  }
+
+  &__link {
+    &--clicked {
+      color: #5858fa;
+      background-color: #e0e6f8;
+    }
+  }
+
+  &__left svg {
+    cursor: pointer;
+    fill: #666666;
+    transform: rotate(-90deg);
+  }
+  &__right svg {
+    cursor: pointer;
+    fill: #666666;
+    transform: rotate(90deg);
+  }
+}

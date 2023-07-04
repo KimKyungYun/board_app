@@ -1,4 +1,4 @@
-import {Link,useLocation} from 'react-router-dom';
+import {Link,useLocation,Outlet} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../../assets/Icon/board_icon.svg';
 import styles from './TopNavigation.module.scss';
 export default function TopNavigation(){

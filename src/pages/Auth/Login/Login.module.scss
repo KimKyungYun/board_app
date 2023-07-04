@@ -5,10 +5,19 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+
+  @include media.media-breakpoint-down(mobile) {
+    align-items: normal;
+    margin-top: 100px;
+  }
 }
 
 .form {
   width: 368px;
+
+  @include media.media-breakpoint-down(mobile) {
+    width: 270px;
+  }
 }
 
 .loginform {
@@ -27,9 +36,14 @@
     background-color: #eeeeee;
     font-size: 16px;
 
+    @include media.media-breakpoint-down(mobile) {
+      width: 270px;
+    }
+
     &:focus {
       outline: 2px solid #99ccff;
     }
+
     &::placeholder {
       color: #c4c4c4;
     }
@@ -38,6 +52,10 @@
   &__signup {
     color: #666666;
     font-weight: 500;
+
+    @include media.media-breakpoint-down(mobile) {
+      font-size: 15px;
+    }
     &--link {
       text-decoration: none;
       font-weight: 700;
@@ -54,5 +72,9 @@
     background-color: #c4c4c4;
     color: #ffffff;
     font-size: 16px;
+
+    @include media.media-breakpoint-down(mobile) {
+      width: 270px;
+    }
   }
 }
