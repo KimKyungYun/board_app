@@ -1,5 +1,6 @@
-import { ViewCount, BoardList } from "./entity";
+import { ViewCount, BoardInfo } from "./entity";
+import postApi from "./postApiClient";
 
-export const getBoardInfo=(param:BoardList)=>{
-  
+export const getBoardInfo=(param:BoardInfo)=>{
+  postApi.get<BoardInfo>(`/post?id=${param.id}`);
 }

@@ -5,3 +5,5 @@ const postApi = axios.create({
   baseURL: `${API_PATH}/post`,
   timeout: 2000,
 });
+
+export default postApi;

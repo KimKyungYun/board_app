@@ -3,7 +3,7 @@ export interface ViewCount {
   id: number;
 }
 
-export interface BoardList {
+export interface BoardInfo {
   createdAt: string;
   updateAt: string;
   content: string;

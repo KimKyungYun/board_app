@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Pagination from 'components/common/Pagination';
 import styles from './BoardList.module.scss';
 import List from './static/entity';
+import { Link } from 'react-router-dom';
+import BoardDetail from 'pages/BoardDetail';
 
 export default function BoardList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,13 +25,17 @@ export default function BoardList() {
         </div>
         <ul className={styles.board__list}>
           {List.slice(indexOfFirst, indexOfLast).map((item) => (
-            <li className={styles['board__list--item']}>
-              <span>{item.id}</span>
-              <span>{item.title}</span>
-              <span>{item.createdAt}</span>
-              <span>{item.user_id}</span>
-              <span>{item.viewcount}</span>
-            </li>
+            <Link to={{
+              pathname:`/list/detail${item.id}`
+            }}>
+              <li className={styles['board__list--item']}>
+                <span>{item.id}</span>
+                <span>{item.title}</span>
+                <span>{item.createdAt}</span>
+                <span>{item.writer}</span>
+                <span>{item.viewcount_id}</span>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>
