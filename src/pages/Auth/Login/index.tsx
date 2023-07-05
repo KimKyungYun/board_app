@@ -1,18 +1,57 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as ErrorIcon } from "assets/Icon/error.svg";
 import styles from "./Login.module.scss";
-import AuthDetail from "../../../components/Auth/AuthDetail";
+import AuthDetail from "components/Auth/AuthDetail";
 import { useForm } from "react-hook-form";
-import { ID_REGEXP, PASSWORD_REGEXP } from "components/Auth/static/Regexp";
+import { PASSWORD_REGEXP } from "components/Auth/static/Regexp";
 import { useState } from "react";
+import { login } from "api/user";
+import checkAxiosErrorMessage from "utils/ts/checkAxiosError";
 
 interface LoginFormInput {
-  id: string;
+  username: string;
   password: string;
 }
 
+const useLoginRequest = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: (success: string) => void;
+  onError?: (error: string) => void;
+}) => {
+  const navigate = useNavigate();
+
+  const submitLogin = async ({ username, password }: LoginFormInput) => {
+    if (!PASSWORD_REGEXP.test(password)) {
+      onError?.(
+        "비밀번호는 문자, 숫자, 특수문자를 포함한 8~16자리로 이루어져야 합니다."
+      );
+    } else {
+      try {
+        const { data } = await login({
+          username: username,
+          password,
+        });
+        console.log(typeof data);
+        // sessionStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data);
+        navigate("/");
+        onSuccess?.("성공");
+      } catch (error) {
+        if (checkAxiosErrorMessage(error)) {
+          onError?.(
+            error.response?.data.errorMessage ??
+              "서버 통신 중 오류가 발생했습니다."
+          );
+        }
+      }
+    }
+  };
+
+  return submitLogin;
+};
 export default function Login() {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -20,32 +59,18 @@ export default function Login() {
   } = useForm<LoginFormInput>({
     mode: "onChange",
     defaultValues: {
-      id: "",
+      username: "",
       password: "",
     },
   });
 
-  const onSubmit = ({ id, password }: LoginFormInput) => {
-    if (!ID_REGEXP.test(id)) {
-      setErrorMsg(
-        `아이디 형식이 잘못되었습니다.
-        (영어 숫자를 포함한 5자리이상, 19자리이하)`
-      );
-    }
-    if (!PASSWORD_REGEXP.test(password)) {
-      setErrorMsg(
-        `비밀번호 형식이 잘못되었습니다.
-        (특수문자,영문,숫자를 포함한 16자이하)`
-      );
-    } else {
-      setErrorMsg(null);
-    }
-  };
+  const [errorMsg, setErroMsg] = useState<string>("");
+  const submitLogin = useLoginRequest({ onError: setErroMsg });
 
   return (
     <div className={styles.content}>
       <div className={styles.form}>
-        <form className={styles.loginform} onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.loginform} onSubmit={handleSubmit(submitLogin)}>
           <AuthDetail
             name="로그인하기"
             first="게시판에 게시글을 작성하시려면"
@@ -59,7 +84,7 @@ export default function Login() {
             type="text"
             placeholder="아이디"
             className={styles.loginform__input}
-            {...register("id", { required: true })}
+            {...register("username", { required: true })}
           />
           <input
             type="password"

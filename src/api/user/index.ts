@@ -11,7 +11,7 @@ export const register = (param: RegisterParams) =>
   userApi.post<User>("/signup", param);
 
 export const login = async (param: LoginParams) => {
-  const { data } = await userApi.post<LoginResponse>("/signin", param);
+  const { data } = await userApi.post<string>("/signin", param);
   return { data };
 };
 

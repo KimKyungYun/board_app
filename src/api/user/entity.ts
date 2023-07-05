@@ -8,7 +8,7 @@ export interface RefreshResponse {
 }
 
 export interface LoginParams {
-  account: string;
+  username: string;
   password: string;
 }
 

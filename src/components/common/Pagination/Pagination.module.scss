@@ -19,9 +19,11 @@
   }
 
   &__link {
+    cursor: pointer;
+
     &--clicked {
-      color: #5858fa;
-      background-color: #e0e6f8;
+      color: #0090f9;
+      background-color: azure;
     }
   }
 

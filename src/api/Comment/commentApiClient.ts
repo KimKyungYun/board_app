@@ -1,7 +1,6 @@
-import axios, { AxiosError } from "axios";
-import { API_PATH } from "config/constants";
+import axios from "axios";
 
 const commentApi = axios.create({
-  baseURL: `${API_PATH}/posts`,
+  baseURL: `http://43.202.86.32/posts`,
   timeout: 2000,
 });

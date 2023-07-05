@@ -5,43 +5,112 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+
+  @include media.media-breakpoint-down(mobile) {
+    align-items: flex-start;
+    margin-top: 120px;
+  }
+
 }
 
 .form {
   width: 375px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  
+  @include media.media-breakpoint-down(mobile) {
+    width: 90%;
+    display: block;
+  }
 
+  &__form {
+    position: relative;
+  }
+  
   &__input {
-    width: 350px;
+    width: 95%;
     height: 40px;
     border-radius: 20px;
-    margin: 8px 0;
-    padding-left: 16px;
+    margin-bottom: 12px;
+    padding-left: 15px;
     border: none;
     background-color: #eeeeee;
     font-size: 16px;
-
-    @include media.media-breakpoint-down(mobile) {
-      width: 270px;
+    
+    &--error {
+      outline: #99ccff;
     }
-
     &:focus {
+      border: none;
       outline: 2px solid #99ccff;
     }
 
     &::placeholder {
       color: #c4c4c4;
     }
-
-    &--id {
-      
-    }
-  
   }
 
+  &__label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__error {
+    width: 70%;
+    margin-left: 5px;
+    height: 20px;
+    font-size: 14px;
+  }
+  &__error-icon {
+    display: none;
+
+    &--active {
+      display:inline;
+    }
+  }
+  
+  &__submit {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #99ccff;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+
+    &:disabled {
+      cursor: default;
+      color: #ffffff;
+      background-color: #c4c4c4;
+  }
+
+}
+&__id-check-button {
+  width: 100px;
+  height: 40px;
+  position: absolute;
+  border: none;
+  background-color:  #99ccff;
+  border-radius: 20px; 
+  top: 40px;
+  right: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #99ccff;
+  }
+}
+
   &__title {
-    font-size: 24px;
+    font-size: 32px;
+    margin-bottom: 20px;
     font-weight: 700;
     color: #666666;
   }  
