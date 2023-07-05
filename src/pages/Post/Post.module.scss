@@ -99,4 +99,36 @@
       border-radius: 10px;
     }
   }
+
+  &__preview {
+    &--name {
+      display: inline-block;
+      height: 40px;
+      padding: 0 10px;
+      vertical-align: middle;
+      border: 1px solid #dddddd;
+      width: 78%;
+      color: #999999;
+    }
+
+    &--label {
+      display: inline-block;
+      padding: 0 10px;
+      color: #fff;
+      vertical-align: middle;
+      background-color: #999999;
+      cursor: pointer;
+      height: 40px;
+      margin-left: 10px;
+    }
+
+    &--input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
+  }
 }
