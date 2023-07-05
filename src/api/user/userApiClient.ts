@@ -1,5 +1,4 @@
-import axios, { AxiosError } from "axios";
-import { RefreshResponse } from "./entity";
+import axios from "axios";
 
 const userApi = axios.create({
   baseURL: `http://43.202.86.32/user`,

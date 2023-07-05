@@ -1,10 +1,9 @@
-import classNames from "utils/ts/className";
 import { useState } from "react";
 import styles from "./Post.module.scss";
-import Preview from "./components/Preview";
+import { useNavigate } from "react-router-dom";
 export default function Post() {
   const [fileName, setFileName] = useState<string>("");
-
+  const navigate = useNavigate();
   return (
     <div className={styles.content}>
       <div className={styles.post}>
@@ -27,14 +26,14 @@ export default function Post() {
               placeholder="내용을 입력해주세요."
             />
             <div className={styles.form__preview}>
+              <label htmlFor="file" className={styles["form__preview--label"]}>
+                파일찾기
+              </label>
               <input
                 value={fileName}
                 placeholder="첨부파일"
                 className={styles["form__preview--name"]}
               />
-              <label htmlFor="file" className={styles["form__preview--label"]}>
-                파일찾기
-              </label>
               <input
                 accept="image/*"
                 multiple
@@ -46,8 +45,16 @@ export default function Post() {
             </div>
           </label>
           <div className={styles.form__button}>
-            <button className={styles["form__button--submit"]}>확인</button>
-            <button className={styles["form__button--cancel"]}>취소</button>
+            <button type="submit" className={styles["form__button--submit"]}>
+              확인
+            </button>
+            <button
+              type="button"
+              className={styles["form__button--cancel"]}
+              onClick={() => navigate("/list")}
+            >
+              취소
+            </button>
           </div>
         </form>
       </div>

@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import { ReactComponent as Logo } from "../../../assets/Icon/board_icon.svg";
 import CompanyLogo from "assets/png/company_logo.png";
 import styles from "./TopNavigation.module.scss";
 import cn from "utils/ts/className";

@@ -1,6 +1,5 @@
 import {
   LoginParams,
-  LoginResponse,
   RegisterParams,
   User,
   CheckIdDuplicateParams,
