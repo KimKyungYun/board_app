@@ -1,9 +1,32 @@
-.div {
-  height: 100vh;
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.carousel {
+  width: 80%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__slider {
+    width: 100%;
+    margin: 0;
+  }
+
+  &__item {
+    text-align: center;
+    height: 70vh;
+  }
+  &__image{
+    
+  }
 }
 .image {
-  &__first {
-    background: url(../..//assets/Icon/sunlight.jpg) no-repeat;
-    background-attachment: fixed;
-  }
+  background: url(https://cdn.pixabay.com/photo/2020/07/14/16/18/snow-5404785_960_720.jpg)
+    no-repeat;
+  background-attachment: fixed;
 }

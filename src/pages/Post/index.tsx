@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Post.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { postBoard } from "api/board";
+import axios from "axios";
 
 interface PostData {
   images: object;
@@ -12,13 +12,12 @@ interface PostData {
 
 const usePost = (files: any) => {
   const navigate = useNavigate();
-  const signup = (form: PostData) => {
+  const posting = (form: PostData) => {
     const accessToken = sessionStorage.getItem("accessToken");
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "multipart/form-data;boundary",
-    };
-
+    // const headers = {
+    //   Authorization: `Bearer ${accessToken}`,
+    //   "Content-Type": "multipart/form-data;boundary",
+    // };
     const requestObject = {
       images: files,
       request: {
@@ -33,20 +32,24 @@ const usePost = (files: any) => {
     formData.append("images", files);
     formData.append("request", requestBlob);
 
-    postBoard(requestBlob, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "multipart/form-data;boundary",
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-        navigate("/list");
-      })
-      .catch();
+    const postBoard = async () => {
+      await axios
+        .post("http://192.168.2.12:8080/board", requestObject, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data;boundary",
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          navigate("/list");
+        })
+        .catch();
+    };
+    postBoard();
   };
 
-  return signup;
+  return posting;
 };
 export default function Post() {
   const [fileName, setFileName] = useState<string | null>(null);
