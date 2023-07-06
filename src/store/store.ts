@@ -1,7 +1,3 @@
-import { atom } from "jotai";
-
-export const boardItem = atom(0);
-
 export const getAuth = () => {
   if (
     localStorage.getItem("refreshToken") &&

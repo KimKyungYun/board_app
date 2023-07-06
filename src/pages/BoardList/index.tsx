@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "components/common/Pagination";
 import styles from "./BoardList.module.scss";
-import List from "./static/entity";
 import { Link } from "react-router-dom";
-import { useAtom } from "jotai";
-import { boardItem } from "store/store";
-export default function BoardList() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [postsPerPage] = useState<number>(10);
-  const [, setBoardInfo] = useAtom(boardItem);
+import { getAllBoard } from "api/board";
+import { DateCounter } from "components/common/DateCounter/DateCounter";
 
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
+export default function BoardList() {
+  const [list, setList] = useState<any>();
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllBoard(currentPage);
+      setList(data);
+    };
+    fetchData();
+  }, [currentPage]);
 
   return (
     <div className={styles.content}>
@@ -25,19 +29,21 @@ export default function BoardList() {
           <span className={styles["board__index--item"]}>조회수</span>
         </div>
         <ul className={styles.board__list}>
-          {List.slice(indexOfFirst, indexOfLast).map((item) => (
+          {list?.data.content.map((item: any) => (
             <Link
               to="/detail"
               key={item.id}
               className={styles["board__list--link"]}
-              onClick={() => setBoardInfo(item.id)}
+              onClick={async () =>
+                await sessionStorage.setItem("board-id", item.id)
+              }
             >
               <li className={styles["board__list--item"]}>
                 <span>{item.id}</span>
                 <span>{item.title}</span>
-                <span>{item.createdAt}</span>
+                <span>{DateCounter(item.updateAt)}</span>
                 <span>{item.writer}</span>
-                <span>{item.viewcount_id}</span>
+                <span>{item.viewCount}</span>
               </li>
             </Link>
           ))}
@@ -49,8 +55,7 @@ export default function BoardList() {
         </div>
       </div>
       <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={List.length}
+        totalPage={list?.data.totalPages}
         currentPage={currentPage}
         paginate={setCurrentPage}
       />

@@ -1,11 +1,14 @@
 export interface BoardInfoParams {
-  createdAt: string;
-  updateAt: string;
-  content: string;
-  title: string;
-  writer: string;
-  viewcount_id: number;
   id: number;
+  title: string;
+  content: string;
+  writer: string;
+  images: Array<string>;
+  viewCount: number;
+}
+
+export interface BoardAllparams {
+  data: object;
 }
 
 export interface PostInfoParams {

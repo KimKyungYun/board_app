@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const postApi = axios.create({
-  baseURL: `http://43.202.86.32/board`,
+const boardApi = axios.create({
+  baseURL: `http://192.168.2.12:8080/board`,
   timeout: 2000,
 });
 
-export default postApi;
+export default boardApi;

@@ -1,20 +1,22 @@
-import { BoardInfoParams, PostInfoParams } from "./entity";
+import { BoardInfoParams, PostInfoParams, BoardAllparams } from "./entity";
 import boardApi from "./boardApiClient";
 
-export const getBoardDetail = (param: number) => {
-  boardApi.get<BoardInfoParams>(`/info?id=${param}`);
+export const getBoardDetail = (param: number | null | "") => {
+  const data = boardApi.get<BoardInfoParams>(`/info?boardId=${param}`);
+  return data;
 };
 
 export const deleteBoard = (param: number) => {
   boardApi.delete(`?id=${param}`);
 };
 
-export const getAllBoard = () => {
-  boardApi.get(`/all`);
+export const getAllBoard = (param: number) => {
+  const data = boardApi.get<BoardAllparams>(`/all?page=${param}`);
+  return data;
 };
 
-export const postBoard = (param: PostInfoParams) => {
-  const data = boardApi.post<PostInfoParams>("");
+export const postBoard = (param: Blob, headers: object) => {
+  const data = boardApi.post<BoardInfoParams>("", param, headers);
   return data;
 };
 
