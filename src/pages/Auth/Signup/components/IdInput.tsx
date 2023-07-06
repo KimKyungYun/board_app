@@ -76,13 +76,10 @@ export default function IdInput() {
           validate: {
             checkValid: (val) =>
               val === currentCheckedId || "아이디 중복확인을 해주세요.",
-            checkError: () =>
-              status === "error" || "이미 사용중인 아이디입니다.",
             checkLoading: () => status !== "loading" || "중복 확인중입니다.",
           },
         })}
       />
-      {status}
       <button
         type="button"
         className={cn({

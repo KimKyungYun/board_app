@@ -2,6 +2,7 @@ import {
   LoginParams,
   RegisterParams,
   User,
+  LoginResponse,
   CheckIdDuplicateParams,
 } from "./entity";
 import userApi from "./userApiClient";
@@ -10,8 +11,8 @@ export const register = (param: RegisterParams) =>
   userApi.post<User>("/signup", param);
 
 export const login = async (param: LoginParams) => {
-  const { data } = await userApi.post<string>("/signin", param);
-  return { data };
+  const data = await userApi.post<LoginResponse>("/signin", param);
+  return data;
 };
 
 export const checkIdDuplicate = (param: CheckIdDuplicateParams) =>

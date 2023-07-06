@@ -1,9 +1,4 @@
-export interface ViewCount {
-  view_count: number;
-  id: number;
-}
-
-export interface BoardInfo {
+export interface BoardInfoParams {
   createdAt: string;
   updateAt: string;
   content: string;
@@ -11,4 +6,9 @@ export interface BoardInfo {
   writer: string;
   viewcount_id: number;
   id: number;
+}
+
+export interface PostInfoParams {
+  images: object;
+  request: object;
 }

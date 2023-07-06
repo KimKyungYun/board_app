@@ -14,7 +14,6 @@ interface LoginFormInput {
 }
 
 const useLoginRequest = ({
-  onSuccess,
   onError,
 }: {
   onSuccess?: (success: string) => void;
@@ -33,16 +32,13 @@ const useLoginRequest = ({
           username: username,
           password,
         });
-        console.log(typeof data);
-        // sessionStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data);
+        sessionStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
         navigate("/");
-        onSuccess?.("성공");
       } catch (error) {
         if (checkAxiosErrorMessage(error)) {
           onError?.(
-            error.response?.data.errorMessage ??
-              "서버 통신 중 오류가 발생했습니다."
+            error.response?.data.message ?? "서버 통신 중 오류가 발생했습니다."
           );
         }
       }

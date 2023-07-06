@@ -1,9 +1,9 @@
-...............................................home {
-  background: url(../..//assets/Icon/sunlight.jpg) no-repeat;
-  width: 100%;
-  background-attachment: fixed;
-  height: 500vh;
+.div {
+  height: 100vh;
 }
-.first-background {
-  background-attachment: fixed;
+.image {
+  &__first {
+    background: url(../..//assets/Icon/sunlight.jpg) no-repeat;
+    background-attachment: fixed;
+  }
 }

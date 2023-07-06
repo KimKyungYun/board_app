@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Post.module.scss";
 import { useNavigate } from "react-router-dom";
 export default function Post() {
-  const [fileName, setFileName] = useState<string>("");
+  const [fileName, setFileName] = useState<string | null>(null);
   const navigate = useNavigate();
   return (
     <div className={styles.content}>
@@ -29,18 +29,21 @@ export default function Post() {
               <label htmlFor="file" className={styles["form__preview--label"]}>
                 파일찾기
               </label>
-              <input
-                value={fileName}
+              <span
                 placeholder="첨부파일"
                 className={styles["form__preview--name"]}
-              />
+              >
+                {fileName ? fileName : "파일찾기"}
+              </span>
               <input
                 accept="image/*"
                 multiple
                 id="file"
                 type="file"
                 className={styles["form__preview--input"]}
-                onChange={(e) => setFileName(e.target.value)}
+                onChange={(e) => {
+                  e.target.value && setFileName(e.target.value);
+                }}
               />
             </div>
           </label>

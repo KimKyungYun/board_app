@@ -1,9 +1,9 @@
 import styles from "./Home.module.scss";
-import Sunlight from "assets/Icon/sunlight.jpg";
 export default function Home() {
   return (
     <div className={styles.home}>
-      <img src={Sunlight} alt="" className={styles["first-background"]} />
+      <div className={styles.image__first}></div>
+      <div className={styles.image__second}></div>
     </div>
   );
 }

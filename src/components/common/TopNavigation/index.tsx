@@ -4,9 +4,15 @@ import styles from "./TopNavigation.module.scss";
 import cn from "utils/ts/className";
 
 export default function TopNavigation() {
-  const auth = true;
+  const auth =
+    sessionStorage.getItem("accessToken") &&
+    localStorage.getItem("refreshToken");
   const location = useLocation();
 
+  const signOut = () => {
+    sessionStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+  };
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar__logo}>
@@ -37,7 +43,7 @@ export default function TopNavigation() {
             글쓰기
           </Link>
         </li>
-        {auth ? (
+        {!auth ? (
           location.pathname === "/login" ? (
             <li>
               <Link to="/signup" className={styles.navbar__link}>
@@ -52,7 +58,7 @@ export default function TopNavigation() {
             </li>
           )
         ) : (
-          <li>
+          <li onClick={signOut}>
             <Link to="/" className={styles.navbar__link}>
               로그아웃
             </Link>
