@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import checkAxiosErrorMessage from "utils/ts/checkAxiosError";
 
-interface PropsParam {
-  id: number;
-}
-
 const eraseComment = (boardId: number, commentId: number) => {
   const withdrawComment = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
@@ -30,7 +26,7 @@ const eraseComment = (boardId: number, commentId: number) => {
   };
   return withdrawComment;
 };
-export default function CommentList({ id }: PropsParam) {
+export default function CommentList() {
   const [comments, getComments] = useState<Array<object>>();
   const [deleteId, setDeleteId] = useState<number>(-1);
   const sessionId = sessionStorage.getItem("board-id");
@@ -42,11 +38,15 @@ export default function CommentList({ id }: PropsParam) {
 
   useEffect(() => {
     const bringComments = async () => {
+      const sessionId = sessionStorage.getItem("board-id");
+      const id = sessionId ? parseInt(sessionId) : -1;
       const data = await getComment(id);
+      console.log(data);
+
       getComments(data.data);
     };
     bringComments();
-  });
+  }, []);
 
   return (
     <div>

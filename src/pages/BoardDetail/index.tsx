@@ -48,7 +48,6 @@ export default function BoardDetail() {
       const data = await getBoardDetail(id);
       setData(data.data);
       setIsLoading(false);
-      console.log(data);
     };
     getDetail();
   }, []);
@@ -110,7 +109,7 @@ export default function BoardDetail() {
         </div>
       )}
       <CommentInput id={data?.id} />
-      <CommentList id={data?.id} />
+      <CommentList />
     </div>
   );
 }
