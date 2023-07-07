@@ -1,4 +1,10 @@
-import { BoardInfoParams, PostInfoParams, BoardAllparams } from "./entity";
+import {
+  BoardInfoParams,
+  PostInfoParams,
+  BoardAllparams,
+  CommentInfoParams,
+  CommentDeleteParams,
+} from "./entity";
 import boardApi from "./boardApiClient";
 
 export const getBoardDetail = (param: number | null | "") => {
@@ -23,4 +29,16 @@ export const postBoard = (param: Blob, headers: object) => {
 export const modifyBoard = (param: PostInfoParams) => {
   const data = boardApi.put<PostInfoParams>("");
   return data;
+};
+
+export const postComment = (param: CommentInfoParams) => {
+  boardApi.post(`/${param.boardId}/comment`, param.content, param.headers);
+  console.log(param.content);
+};
+
+export const deleteComment = (param: CommentDeleteParams) => {
+  boardApi.delete<string>(
+    `/${param.boardId}/comment?commentId=${param.commentId}`,
+    param.headers
+  );
 };

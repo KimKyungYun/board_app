@@ -1,11 +1,11 @@
 .home {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 .carousel {
+  margin-top: 82px;
   width: 80%;
 
   display: flex;
@@ -14,15 +14,20 @@
 
   &__slider {
     width: 100%;
+    display: flex;
     margin: 0;
   }
 
   &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    background-color: aliceblue;
     height: 70vh;
   }
-  &__image{
-    
+  &__image {
+    width: 100%;
   }
 }
 .image {

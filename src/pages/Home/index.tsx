@@ -5,12 +5,12 @@ import Slider from "react-slick";
 
 export default function Home() {
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 1000,
-    //autoplay: true,
+    autoplay: true,
     autoplayspeed: 1000,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
     pauseOnHover: true,
@@ -23,6 +23,7 @@ export default function Home() {
       <div className={styles.carousel}>
         <Slider {...settings} className={styles.carousel__slider}>
           <div className={styles.carousel__item}>
+
             <img
               src="https://cdn.pixabay.com/photo/2020/07/14/16/18/snow-5404785_960_720.jpg"
               alt=""

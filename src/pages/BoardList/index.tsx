@@ -4,21 +4,30 @@ import styles from "./BoardList.module.scss";
 import { Link } from "react-router-dom";
 import { getAllBoard } from "api/board";
 import { DateCounter } from "components/common/DateCounter/DateCounter";
+import Loading from "components/common/Loading/Loading";
 
 export default function BoardList() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [list, setList] = useState<any>();
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const fetchData = async () => {
-      const data = await getAllBoard(currentPage);
-      setList(data);
+      try {
+        const data = await getAllBoard(currentPage);
+        setList(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
   }, [currentPage]);
 
   return (
     <div className={styles.content}>
+      {isLoading && <Loading />}
       <div className={styles.board}>
         <div className={styles.board__title}>커뮤니티</div>
         <div className={styles.board__index}>

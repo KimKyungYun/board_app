@@ -1,8 +1,8 @@
+import { refreshAccessToken } from "api/user/userApiClient";
+
 export const getAuth = () => {
-  if (
-    localStorage.getItem("refreshToken") &&
-    sessionStorage.getItem("accessToken")
-  ) {
+  refreshAccessToken();
+  if (sessionStorage.getItem("accessToken")) {
     return true;
   }
   return false;
@@ -11,4 +11,5 @@ export const getAuth = () => {
 export const clearAuth = () => {
   localStorage.removeItem("refreshToken");
   sessionStorage.removeItem("accessToken");
+  sessionStorage.removeItem("username");
 };

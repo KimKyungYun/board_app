@@ -15,3 +15,15 @@ export interface PostInfoParams {
   images: object;
   request: object;
 }
+
+export interface CommentInfoParams {
+  boardId: number;
+  content: object;
+  headers: object;
+}
+
+export interface CommentDeleteParams {
+  boardId: number;
+  commentId: number;
+  headers: object;
+}

@@ -33,6 +33,7 @@ const useLoginRequest = ({
           password,
         });
         sessionStorage.setItem("accessToken", data.accessToken);
+        sessionStorage.setItem("userId", username);
         localStorage.setItem("refreshToken", data.refreshToken);
         navigate("/");
       } catch (error) {

@@ -1,20 +1,19 @@
 import axios, { AxiosError } from "axios";
 
 const userApi = axios.create({
-  baseURL: `http://192.168.2.12:8080/user`,
+  baseURL: `http://43.202.86.32/user`,
   timeout: 2000,
 });
 
 export const refreshAccessToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
   if (!refreshToken) {
-    return Promise.reject();
+    return null;
   }
   try {
     const { data } = await userApi.get<string>(
       `/token?refreshToken=${refreshToken}`
     );
-    console.log(data);
     sessionStorage.setItem("accessToken", data);
   } catch {
     sessionStorage.removeItem("accessToken");
@@ -25,8 +24,6 @@ export const refreshAccessToken = async () => {
 
 userApi.interceptors.request.use((config) => {
   const accessToken = sessionStorage.getItem("accessToken");
-  console.log(accessToken);
-
   // eslint-disable-next-line no-param-reassign
   if (config.headers && accessToken)
     config.headers.Authorization = `Bearer ${accessToken}`;

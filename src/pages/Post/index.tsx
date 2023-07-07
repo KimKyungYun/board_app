@@ -12,29 +12,28 @@ interface PostData {
 
 const usePost = (files: any) => {
   const navigate = useNavigate();
-  const posting = (form: PostData) => {
+  const posting = (form: PostData) => { 
     const accessToken = sessionStorage.getItem("accessToken");
     // const headers = {
     //   Authorization: `Bearer ${accessToken}`,
     //   "Content-Type": "multipart/form-data;boundary",
     // };
     const requestObject = {
-      images: files,
-      request: {
-        title: form.title,
-        content: form.content,
-      },
+      title: form.title,
+      content: form.content,
     };
     const requestBlob = new Blob([JSON.stringify(requestObject)], {
       type: "application/json",
     });
     const formData = new FormData();
-    formData.append("images", files);
+    for (let i = 0; i < files.length; i++) {
+      formData.append("images", files[i]);
+    }
     formData.append("request", requestBlob);
 
     const postBoard = async () => {
       await axios
-        .post("http://192.168.2.12:8080/board", requestObject, {
+        .post("http://43.202.86.32/board", formData, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "multipart/form-data;boundary",
@@ -44,7 +43,9 @@ const usePost = (files: any) => {
           console.log(response.data);
           navigate("/list");
         })
-        .catch();
+        .catch((error) => {
+          console.log(error);
+        });
     };
     postBoard();
   };
