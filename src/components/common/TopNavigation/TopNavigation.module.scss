@@ -9,6 +9,7 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   background-color: #ffffff;
+  z-index: 999;
 
   @include media.media-breakpoint-down(mobile) {
     position: static;

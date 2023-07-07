@@ -1,8 +1,11 @@
 import { refreshAccessToken } from "api/user/userApiClient";
 
 export const getAuth = () => {
-  refreshAccessToken();
   if (sessionStorage.getItem("accessToken")) {
+    return true;
+  } 
+  else if (localStorage.getItem("refreshToken")) {
+    refreshAccessToken();
     return true;
   }
   return false;

@@ -8,6 +8,7 @@ import Post from "./pages/Post";
 import Login from "./pages/Auth/Login";
 import BoardDetail from "pages/BoardDetail";
 import AuthRoute from "components/Auth/AuthRoute";
+import Modify from "pages/Modify";
 function App() {
   return (
     <Suspense fallback={<div />}>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route element={<AuthRoute needAuth redirectRoute="/login" />}>
           <Route path="/post" element={<Post />} />
+          <Route path="/modify" element={<Modify />} />
         </Route>
       </Routes>
     </Suspense>

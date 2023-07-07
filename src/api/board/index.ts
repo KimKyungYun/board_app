@@ -4,16 +4,21 @@ import {
   BoardAllparams,
   CommentInfoParams,
   CommentDeleteParams,
+  BoardDeleteParams,
 } from "./entity";
 import boardApi from "./boardApiClient";
+import axios from "axios";
 
 export const getBoardDetail = (param: number | null | "") => {
   const data = boardApi.get<BoardInfoParams>(`/info?boardId=${param}`);
   return data;
 };
 
-export const deleteBoard = (param: number) => {
-  boardApi.delete(`?id=${param}`);
+export const deleteBoard = (param: BoardDeleteParams) => {
+  axios.delete(
+    `http://43.202.86.32/board?boardId=${param.boardId}`,
+    param.headers
+  );
 };
 
 export const getAllBoard = (param: number) => {

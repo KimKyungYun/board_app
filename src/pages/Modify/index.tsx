@@ -1,26 +1,23 @@
-import { useState } from "react";
-import styles from "./Post.module.scss";
+import { useEffect, useState } from "react";
+import styles from "./Modify.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { getBoardDetail } from "api/board";
+import Loading from "components/common/Loading/Loading";
 
-interface PostData {
-  images: object;
-  title: string;
-  content: string;
-}
-
-const usePost = (files: any) => {
+const usePost = (id: number, files: any, title: string, content: string) => {
   const navigate = useNavigate();
-  const posting = (form: PostData) => {
+  const posting = () => {
     const accessToken = sessionStorage.getItem("accessToken");
     // const headers = {
     //   Authorization: `Bearer ${accessToken}`,
     //   "Content-Type": "multipart/form-data;boundary",
     // };
     const requestObject = {
-      title: form.title,
-      content: form.content,
+      id: id,
+      title: title,
+      content: content,
     };
     const requestBlob = new Blob([JSON.stringify(requestObject)], {
       type: "application/json",
@@ -35,10 +32,10 @@ const usePost = (files: any) => {
 
     const postBoard = async () => {
       await axios
-        .post("http://43.202.86.32/board", formData, {
+        .put("http://43.202.86.32/board", formData, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data;boundary",
+            "Content-Type": "multipart/form-data;",
           },
         })
         .then((response) => {
@@ -54,27 +51,35 @@ const usePost = (files: any) => {
 
   return posting;
 };
-export default function Post() {
+export default function Modify() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [fileName, setFileName] = useState<string | null>(null);
   const [files, setFiles] = useState<any>();
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid },
-  } = useForm<PostData>({
-    mode: "onChange",
-    defaultValues: {
-      title: "",
-      content: "",
-    },
-  });
+  const { handleSubmit } = useForm();
 
-  const postBoard = usePost(files);
+  const postBoard = usePost(data?.id, files, title, content);
+
+  useEffect(() => {
+    const getDetail = async () => {
+      const sessionId = sessionStorage.getItem("board-id");
+      const id = sessionId && parseInt(sessionId);
+      const data = await getBoardDetail(id);
+      setData(data.data);
+      setTitle(data.data.title);
+      setContent(data.data.content);
+      setIsLoading(false);
+    };
+    getDetail();
+  }, []);
 
   return (
     <div className={styles.content}>
+      {isLoading && <Loading />}
       <div className={styles.post}>
         <span className={styles.post__title}>게시글 작성</span>
         <form
@@ -85,18 +90,21 @@ export default function Post() {
           <label className={styles.form__title}>
             <span className={styles["form__title--text"]}>제목</span>
             <input
+              value={title}
               type="text"
               className={styles["form__title--input"]}
               placeholder="제목을 입력해주세요."
-              {...register("title", { required: true })}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </label>
           <label className={styles.form__content}>
             <span className={styles["form__content--text"]}>본문</span>
             <textarea
+              value={content}
+              content={data?.content}
               className={styles["form__content--input"]}
               placeholder="내용을 입력해주세요."
-              {...register("content", { required: true })}
+              onChange={(e) => setContent(e.target.value)}
             />
             <div className={styles.form__preview}>
               <label htmlFor="file" className={styles["form__preview--label"]}>
@@ -122,7 +130,7 @@ export default function Post() {
             <button
               type="submit"
               className={styles["form__button--submit"]}
-              disabled={!isValid}
+              disabled={title === "" && content === ""}
             >
               확인
             </button>

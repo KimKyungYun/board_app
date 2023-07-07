@@ -16,6 +16,11 @@ export interface PostInfoParams {
   request: object;
 }
 
+export interface BoardDeleteParams {
+  boardId: number;
+  headers: object;
+}
+
 export interface CommentInfoParams {
   boardId: number;
   content: object;

@@ -23,7 +23,7 @@ export default function BoardList() {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, list]);
 
   return (
     <div className={styles.content}>

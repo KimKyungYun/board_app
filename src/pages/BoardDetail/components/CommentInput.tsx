@@ -13,7 +13,7 @@ interface CommentSentence {
   content: string;
 }
 const setComment = (id: number, reset: Function) => {
-  const sendComment = (formData: CommentSentence) => {
+  const sendComment = async (formData: CommentSentence) => {
     const accessToken = sessionStorage.getItem("accessToken");
     const header = {
       headers: {
@@ -25,9 +25,12 @@ const setComment = (id: number, reset: Function) => {
       content: { content: formData.content },
       headers: header,
     };
-
-    postComment(submitData);
-    reset();
+    try {
+      await postComment(submitData);
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return sendComment;
 };
@@ -38,7 +41,6 @@ export default function CommentInput({
   setWritten,
 }: CommentData) {
   const auth = getAuth();
-  // const [text, setText] = useState<string>("");
 
   const {
     register,

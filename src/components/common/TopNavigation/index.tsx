@@ -2,11 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import CompanyLogo from "assets/png/company_logo.png";
 import styles from "./TopNavigation.module.scss";
 import cn from "utils/ts/className";
+import { getAuth } from "store/store";
 
 export default function TopNavigation() {
-  const auth =
-    sessionStorage.getItem("accessToken") &&
-    localStorage.getItem("refreshToken");
+  const auth = getAuth();
   const location = useLocation();
 
   const signOut = () => {
