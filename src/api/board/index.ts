@@ -2,7 +2,7 @@ import {
   BoardInfoParams,
   PostInfoParams,
   BoardAllparams,
-  CommentInfoParams,
+  CommentPostParams,
   CommentDeleteParams,
   BoardDeleteParams,
 } from "./entity";
@@ -36,7 +36,11 @@ export const modifyBoard = (param: PostInfoParams) => {
   return data;
 };
 
-export const postComment = (param: CommentInfoParams) => {
+export const getComment=(param:number)=>{
+  const data = boardApi.get(`/info/${param}/comments`);
+  return data;
+}
+export const postComment = (param: CommentPostParams) => {
   boardApi.post(`/${param.boardId}/comment`, param.content, param.headers);
   console.log(param.content);
 };

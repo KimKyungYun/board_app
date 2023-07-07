@@ -36,7 +36,6 @@ const controlBoard = (boardId: number) => {
 export default function BoardDetail() {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isWritten, setIsWritten] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
   const auth = getAuth();
   const userId = sessionStorage.getItem("userId");
@@ -49,10 +48,10 @@ export default function BoardDetail() {
       const data = await getBoardDetail(id);
       setData(data.data);
       setIsLoading(false);
-      setIsWritten(false);
+      console.log(data);
     };
     getDetail();
-  }, [isWritten]);
+  }, []);
 
   const eraseBoard = controlBoard(data?.id);
 
@@ -110,12 +109,8 @@ export default function BoardDetail() {
           )}
         </div>
       )}
-      <CommentInput
-        id={data?.id}
-        comments={data?.comments}
-        setWritten={setIsWritten}
-      />
-      <CommentList comments={data?.comments} setWritten={setIsWritten} />
+      <CommentInput id={data?.id} />
+      <CommentList id={data?.id} />
     </div>
   );
 }

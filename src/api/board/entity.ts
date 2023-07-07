@@ -20,8 +20,7 @@ export interface BoardDeleteParams {
   boardId: number;
   headers: object;
 }
-
-export interface CommentInfoParams {
+export interface CommentPostParams {
   boardId: number;
   content: object;
   headers: object;

@@ -12,7 +12,6 @@ export default function BoardList() {
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const fetchData = async () => {
       try {
         const data = await getAllBoard(currentPage);
@@ -23,7 +22,7 @@ export default function BoardList() {
       }
     };
     fetchData();
-  }, [currentPage, list]);
+  }, [currentPage, isLoading]);
 
   return (
     <div className={styles.content}>

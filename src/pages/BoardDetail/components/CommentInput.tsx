@@ -2,12 +2,9 @@ import { getAuth } from "store/store";
 import styles from "./Comment.module.scss";
 import { postComment } from "api/board";
 import { useForm } from "react-hook-form";
-// import { useState } from "react";
 
 interface CommentData {
   id: number;
-  comments: Array<object>;
-  setWritten: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface CommentSentence {
   content: string;
@@ -35,11 +32,7 @@ const setComment = (id: number, reset: Function) => {
   return sendComment;
 };
 
-export default function CommentInput({
-  id,
-  comments,
-  setWritten,
-}: CommentData) {
+export default function CommentInput({ id }: CommentData) {
   const auth = getAuth();
 
   const {
@@ -57,7 +50,6 @@ export default function CommentInput({
 
   return (
     <div className={styles.content}>
-      <span>댓글 {comments ? comments.length : 0}개</span>
       <div className={styles.writing}>
         <form
           className={styles.writing__form}
@@ -83,9 +75,7 @@ export default function CommentInput({
               <button
                 type="submit"
                 disabled={!isValid || !auth}
-                onClick={() => {
-                  setWritten(true);
-                }}
+                onClick={() => {}}
               >
                 댓글 쓰기
               </button>
