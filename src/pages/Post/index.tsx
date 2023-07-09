@@ -14,10 +14,7 @@ const usePost = (files: any) => {
   const navigate = useNavigate();
   const posting = (form: PostData) => {
     const accessToken = sessionStorage.getItem("accessToken");
-    // const headers = {
-    //   Authorization: `Bearer ${accessToken}`,
-    //   "Content-Type": "multipart/form-data;boundary",
-    // };
+
     const requestObject = {
       title: form.title,
       content: form.content,
@@ -25,20 +22,23 @@ const usePost = (files: any) => {
     const requestBlob = new Blob([JSON.stringify(requestObject)], {
       type: "application/json",
     });
+
     const formData = new FormData();
     if (files) {
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);
       }
     }
+    // formData.append("images", files);
     formData.append("request", requestBlob);
+    console.log(files);
 
     const postBoard = async () => {
       await axios
         .post("http://43.202.86.32/board", formData, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data;boundary",
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
@@ -57,6 +57,7 @@ const usePost = (files: any) => {
 export default function Post() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [files, setFiles] = useState<any>();
+  const [textlength, setTextLength] = useState<number>(0);
   const navigate = useNavigate();
 
   const {
@@ -97,7 +98,11 @@ export default function Post() {
               className={styles["form__content--input"]}
               placeholder="내용을 입력해주세요."
               {...register("content", { required: true })}
+              onChange={(e) => {
+                setTextLength(e.target.value.length);
+              }}
             />
+            <span className={styles['form__content--length']}>{textlength}/255</span>
             <div className={styles.form__preview}>
               <label htmlFor="file" className={styles["form__preview--label"]}>
                 파일찾기

@@ -5,11 +5,16 @@ import { useForm } from "react-hook-form";
 
 interface CommentData {
   id: number;
+  setWritten: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface CommentSentence {
   content: string;
 }
-const setComment = (id: number, reset: Function) => {
+const setComment = (
+  id: number,
+  reset: Function,
+  setWritten: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   const sendComment = async (formData: CommentSentence) => {
     const accessToken = sessionStorage.getItem("accessToken");
     const header = {
@@ -24,6 +29,7 @@ const setComment = (id: number, reset: Function) => {
     };
     try {
       await postComment(submitData);
+      setWritten(true);
       reset();
     } catch (error) {
       console.log(error);
@@ -32,7 +38,7 @@ const setComment = (id: number, reset: Function) => {
   return sendComment;
 };
 
-export default function CommentInput({ id }: CommentData) {
+export default function CommentInput({ id, setWritten }: CommentData) {
   const auth = getAuth();
 
   const {
@@ -46,43 +52,40 @@ export default function CommentInput({ id }: CommentData) {
       content: "",
     },
   });
-  const submitComment = setComment(id, reset);
+  const submitComment = setComment(id, reset, setWritten);
 
   return (
-    <div className={styles.content}>
-      <div className={styles.writing}>
-        <form
-          className={styles.writing__form}
-          onSubmit={handleSubmit(submitComment)}
-        >
-          <label>
-            댓글 작성
-            <span>
-              {auth ? (
-                <input
-                  type="text"
-                  placeholder="댓글을 입력해주세요."
-                  // onChange={(e) => setText(e.target.value)}
-                  {...register("content", { required: true })}
-                />
-              ) : (
-                <input
-                  type="text"
-                  placeholder="로그인 후 이용해주세요."
-                  disabled
-                />
-              )}
-              <button
-                type="submit"
-                disabled={!isValid || !auth}
-                onClick={() => {}}
-              >
-                댓글 쓰기
-              </button>
-            </span>
-          </label>
-        </form>
-      </div>
+    <div className={styles.writing}>
+      <form
+        className={styles.writing__form}
+        onSubmit={handleSubmit(submitComment)}
+      >
+        <label>
+          <span className={styles["writing__form--title"]}>댓글 작성</span>
+          <div className={styles["writing__form__container"]}>
+            {auth ? (
+              <textarea
+                className={styles["writing__form--input"]}
+                placeholder="댓글을 입력해주세요."
+                {...register("content", { required: true })}
+              />
+            ) : (
+              <textarea
+                className={styles["writing__form--input"]}
+                placeholder="로그인 후 이용해주세요."
+                disabled
+              />
+            )}
+            <button
+              className={styles["writing__form--button"]}
+              type="submit"
+              disabled={!isValid || !auth}
+            >
+              댓글 쓰기
+            </button>
+          </div>
+        </label>
+      </form>
     </div>
   );
 }

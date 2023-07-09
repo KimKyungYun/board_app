@@ -57,9 +57,11 @@ export default function BoardList() {
           ))}
         </ul>
         <div className={styles.write}>
-          <button type="button" className={styles.write_button}>
-            글쓰기
-          </button>
+          <Link to="/post">
+            <button type="button" className={styles.write_button}>
+              글쓰기
+            </button>
+          </Link>
         </div>
       </div>
       <Pagination

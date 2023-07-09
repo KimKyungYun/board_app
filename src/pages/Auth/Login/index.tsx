@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 import { PASSWORD_REGEXP } from "components/Auth/static/Regexp";
 import { useState } from "react";
 import { login } from "api/user";
-import checkAxiosErrorMessage from "utils/ts/checkAxiosError";
+import User from "assets/png/login_logo.png";
+import PassWord from "assets/png/password_logo.png";
 
 interface LoginFormInput {
   username: string;
@@ -37,11 +38,7 @@ const useLoginRequest = ({
         localStorage.setItem("refreshToken", data.refreshToken);
         navigate("/");
       } catch (error) {
-        if (checkAxiosErrorMessage(error)) {
-          onError?.(
-            error.response?.data.message ?? "서버 통신 중 오류가 발생했습니다."
-          );
-        }
+        console.log("서버 통신 중 오류가 발생했습니다.");
       }
     }
   };
@@ -77,18 +74,32 @@ export default function Login() {
             {errorMsg && <ErrorIcon aria-hidden />}
             {errorMsg}
           </div>
-          <input
-            type="text"
-            placeholder="아이디"
-            className={styles.loginform__input}
-            {...register("username", { required: true })}
-          />
-          <input
-            type="password"
-            placeholder="비밀번호"
-            className={styles.loginform__input}
-            {...register("password", { required: true })}
-          />
+          <div className={styles.loginform__container}>
+            <img
+              src={User}
+              alt=""
+              className={styles["loginform__container--logo"]}
+            />
+            <input
+              type="text"
+              placeholder="아이디"
+              className={styles.loginform__input}
+              {...register("username", { required: true })}
+            />
+          </div>
+          <div className={styles["loginform__container"]}>
+            <img
+              src={PassWord}
+              alt=""
+              className={styles["loginform__container--logo"]}
+            />
+            <input
+              type="password"
+              placeholder="비밀번호"
+              className={styles.loginform__input}
+              {...register("password", { required: true })}
+            />
+          </div>
           <div className={styles.loginform__signup}>
             <span>계정이 없으신가요? </span>
             <Link to="/signup" className={styles["loginform__signup--link"]}>

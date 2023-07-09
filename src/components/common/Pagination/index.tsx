@@ -17,10 +17,18 @@ export default function Pagination({
     pageBlock.push(i);
   }
   const onClick = (pageNum: number) => {
-    if (pageNum === 10 && currentPage + 10 <= currentPage) {
-      paginate(currentPage + 11 - (currentPage % 10));
-    } else if (pageNum === -10 && currentPage - 10 >= 1) {
-      paginate(currentPage - 9 - (currentPage % 10));
+    if (pageNum === 10) {
+      if (currentPage + 10 <= currentPage) {
+        paginate(currentPage + 11 - (currentPage % 10));
+      } else {
+        paginate(totalPage - 1);
+      }
+    } else if (pageNum === -10) {
+      if (currentPage - 10 >= 1) {
+        paginate(currentPage - 9 - (currentPage % 10));
+      } else {
+        paginate(0);
+      }
     }
   };
 

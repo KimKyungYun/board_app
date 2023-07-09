@@ -8,7 +8,7 @@ import Loading from "components/common/Loading/Loading";
 
 const usePost = (id: number, files: any, title: string, content: string) => {
   const navigate = useNavigate();
-  const posting = () => {
+  const modifying = () => {
     const accessToken = sessionStorage.getItem("accessToken");
     // const headers = {
     //   Authorization: `Bearer ${accessToken}`,
@@ -49,7 +49,7 @@ const usePost = (id: number, files: any, title: string, content: string) => {
     postBoard();
   };
 
-  return posting;
+  return modifying;
 };
 export default function Modify() {
   const [title, setTitle] = useState("");
@@ -81,7 +81,7 @@ export default function Modify() {
     <div className={styles.content}>
       {isLoading && <Loading />}
       <div className={styles.post}>
-        <span className={styles.post__title}>게시글 작성</span>
+        <span className={styles.post__title}>게시글 수정</span>
         <form
           className={styles.form}
           onSubmit={handleSubmit(postBoard)}

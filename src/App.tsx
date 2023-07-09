@@ -17,8 +17,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<BoardList />} />
         <Route path="/detail" element={<BoardDetail />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<AuthRoute needAuth={false} redirectRoute="/" />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
         <Route element={<AuthRoute needAuth redirectRoute="/login" />}>
           <Route path="/post" element={<Post />} />
           <Route path="/modify" element={<Modify />} />

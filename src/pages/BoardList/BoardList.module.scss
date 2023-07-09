@@ -50,7 +50,7 @@
   }
 
   &__list {
-    height: 60vh;
+    height: 100%;
     list-style: none;
 
     @include media.media-breakpoint-down(mobile) {
@@ -89,7 +89,7 @@
   border: none;
   background-color: #99ccff;
   border-radius: 15px;
-  color: #666666;
+  color: #ffffff;
   float: right;
   margin-top: 40px;
   cursor: pointer;

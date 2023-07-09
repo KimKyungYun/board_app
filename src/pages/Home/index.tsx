@@ -1,42 +1,56 @@
 import styles from "./Home.module.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import List from "assets/images/list.jpg";
+import Detail from "assets/images/detail.jpg";
+import Write from "assets/images/write.jpg";
+import Login from "assets/images/login.jpg";
+import Signup from "assets/images/signup.jpg";
 
 export default function Home() {
   const settings = {
-    dots: true,
     infinite: true,
-    speed: 1000,
-    autoplay: true,
-    autoplayspeed: 1000,
+    fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
-    pauseOnHover: true,
-    // nextArrow: <NextArrow />,
-    // prevArrow: <PrevArrow />,
+    variableWidth: true,
   };
-
   return (
-    <div className={styles.home}>
-      <div className={styles.carousel}>
-        <Slider {...settings} className={styles.carousel__slider}>
-          <div className={styles.carousel__item}>
+    <div className={styles.oueter}>
+      <div className={styles.image1} />
 
-            <img
-              src="https://cdn.pixabay.com/photo/2020/07/14/16/18/snow-5404785_960_720.jpg"
-              alt=""
-              className={styles.carousel__image}
-            />
-          </div>
-          <div className={styles.carousel__item}>slide2</div>
-          <div className={styles.carousel__item}>slide3</div>
-          <div className={styles.carousel__item}>slide4</div>
-        </Slider>
+      <div className={styles.inner}>
+        게시판을 이용해보세요.
+        <span className={styles.inner__first}>
+          다양한 사람들과 대화를 해보세요
+        </span>
+        <img className={styles.inner__img} src={List} alt="" />
       </div>
-      <div className={styles.home__text}></div>
-      {/* <div className={styles.image}>2</div> */}
+
+      <div className={styles.image2} />
+
+      <div className={styles.inner}>
+        게시물을 읽어보세요.
+        <span className={styles.inner__first}>
+          댓글을 통해 사람들과 소통하세요.
+        </span>
+        <img className={styles.inner__img} src={Detail} alt="" />
+      </div>
+
+      <div className={styles.image3} />
+
+      <div className={styles.inner}>
+        게시물을 작성해보세요.
+        <span className={styles.inner__first}>
+          공유하고 싶은 사진이나 올리거나 글을 적어보세요.
+        </span>
+        <img className={styles.inner__img} src={Write} alt="" />
+      </div>
+      <div className={styles.inner}>
+        게시물을 작성해보세요.
+        <span className={styles.inner__first}>
+          공유하고 싶은 사진이나 올리거나 글을 적어보세요.
+        </span>
+        <img className={styles.inner__img} src={Login} alt="" />
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 60%;
   border-top: 1px solid #c4c4c4;
 }
 .writing {
@@ -11,5 +11,92 @@
   &__form {
     display: flex;
     flex-direction: column;
+
+    &--title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    &--input {
+      width: 90%;
+      height: 60px;
+      padding: 5px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #99ccff;
+      resize: none;
+
+      &:focus {
+        outline: 1px solid #77bbff;
+      }
+    }
+
+    &--button {
+      border-radius: 5px;
+      border: 1px solid #99ccff;
+      width: 10%;
+      margin-top: 10px;
+      height: 70px;
+      background-color: #99ccff;
+      color: #ffffff;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #77bbff;
+      }
+    }
+  }
+}
+
+.form {
+  &__list {
+    list-style: none;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    border-bottom: 1px solid #c4c4c4;
+  }
+  &__profile {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    &--id {
+      font-size: 18px;
+      font-weight: 700;
+      margin-right: 10px;
+    }
+    &--time {
+      font-size: 12px;
+    }
+  }
+  &__content {
+    width: 100%;
+
+    &--text {
+      margin-right: 5px;
+    }
+
+    &--button {
+      float: right;
+      border: none;
+      background-color: transparent;
+      font-size: 18px;
+      font-weight: 900;
+      color: #99ccff;
+      cursor: pointer;
+
+      &:hover {
+        color: #59acff;
+      }
+    }
   }
 }

@@ -1,9 +1,16 @@
 import { deleteComment, getComment } from "api/board";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import checkAxiosErrorMessage from "utils/ts/checkAxiosError";
+import CommentInput from "./CommentInput";
+import Loading from "components/common/Loading/Loading";
+import styles from "./Comment.module.scss";
+import { DateCounter } from "components/common/DateCounter/DateCounter";
 
-const eraseComment = (boardId: number, commentId: number) => {
+const eraseComment = (
+  boardId: number,
+  commentId: number,
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   const withdrawComment = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
     const header = {
@@ -18,57 +25,74 @@ const eraseComment = (boardId: number, commentId: number) => {
     };
     try {
       await deleteComment(submitData);
+      setToggle(true);
     } catch (error) {
-      if (checkAxiosErrorMessage(error)) {
-        console.log(error);
-      }
+      console.log(error);
     }
   };
   return withdrawComment;
 };
 export default function CommentList() {
-  const [comments, getComments] = useState<Array<object>>();
+  const [written, setWritten] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [comments, setComments] = useState<Array<object>>();
   const [deleteId, setDeleteId] = useState<number>(-1);
   const sessionId = sessionStorage.getItem("board-id");
   const boardId = sessionId !== null ? parseInt(sessionId) : -1;
   const userId = sessionStorage.getItem("userId");
 
   const { handleSubmit } = useForm();
-  const withdrawComment = eraseComment(boardId, deleteId);
+  const withdrawComment = eraseComment(boardId, deleteId, setToggle);
 
   useEffect(() => {
     const bringComments = async () => {
-      const sessionId = sessionStorage.getItem("board-id");
-      const id = sessionId ? parseInt(sessionId) : -1;
-      const data = await getComment(id);
-      console.log(data);
-
-      getComments(data.data);
+      setIsLoading(true);
+      const data = await getComment(boardId);
+      setTimeout(() => {
+        setComments(data.data);
+        setToggle(false);
+        setWritten(false);
+        setIsLoading(false);
+      }, 250);
     };
     bringComments();
-  }, []);
+  }, [boardId, written, toggle]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(withdrawComment)}>
-        <ul>
+    <div className={styles.content}>
+      {isLoading && <Loading />}
+      <CommentInput id={boardId} setWritten={setWritten} />
+      <form className={styles.form} onSubmit={handleSubmit(withdrawComment)}>
+        <ul className={styles.form__list}>
           {comments &&
             comments.map((data: any, index) => {
               return (
-                <li key={index}>
-                  {data.writer}
-                  {data.content}
-                  {data.updateAt}
-                  {data.writer === userId ? (
-                    <button
-                      type="submit"
-                      onClick={() => {
-                        setDeleteId(data.id);
-                      }}
-                    >
-                      댓글삭제
-                    </button>
-                  ) : null}
+                <li className={styles.form__item} key={index}>
+                  <div className={styles.form__profile}>
+                    <span className={styles["form__profile--id"]}>
+                      {data.writer}
+                    </span>
+                    <span className={styles["form__profile--time"]}>
+                      {DateCounter(data.updateAt)}
+                    </span>
+                  </div>
+                  <div className={styles.form__content}>
+                    <span className={styles["form__content--text"]}>
+                      {data.content}
+                    </span>
+                    {data.writer === userId ? (
+                      <button
+                        className={styles["form__content--button"]}
+                        type="submit"
+                        onClick={() => {
+                          setDeleteId(data.id);
+                        }}
+                      >
+                        X
+                      </button>
+                    ) : null}
+                  </div>
                 </li>
               );
             })}
