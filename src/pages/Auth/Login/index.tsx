@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as ErrorIcon } from "assets/Icon/error.svg";
 import styles from "./Login.module.scss";
-import AuthDetail from "components/Auth/AuthDetail";
 import { useForm } from "react-hook-form";
 import { PASSWORD_REGEXP } from "components/Auth/static/Regexp";
 import { useState } from "react";
@@ -18,7 +17,6 @@ interface LoginFormInput {
 const useLoginRequest = ({
   onError,
 }: {
-  onSuccess?: (success: string) => void;
   onError?: (error: string) => void;
 }) => {
   const navigate = useNavigate();
@@ -39,7 +37,7 @@ const useLoginRequest = ({
         localStorage.setItem("refreshToken", data.refreshToken);
         navigate("/");
       } catch (error) {
-        console.log("서버 통신 중 오류가 발생했습니다.");
+        onError?.("아이디 비밀번호를 확인해주세요.");
       }
     }
   };

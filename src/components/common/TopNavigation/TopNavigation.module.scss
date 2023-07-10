@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  background: linear-gradient(to right, #1e466e, #235788, #265e92);
+  background: linear-gradient(to right, #11283e, #235788, #265e92);
   z-index: 999;
 
   @include media.media-breakpoint-down(mobile) {

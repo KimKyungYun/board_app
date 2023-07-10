@@ -11,6 +11,7 @@ interface ModalData {
 
 export default function AuthModal({ title, content, isOpen }: ModalData) {
   const navigate = useNavigate();
+  
   return (
     <div className={styles.modal}>
       <div className={styles.modal__popup}>

@@ -101,7 +101,7 @@ export default function Post() {
                 파일찾기
               </label>
               <div className={styles["form__preview--name"]}>
-                {fileName ? fileName : "첨부파일"}
+                {fileName ? fileName + "..." : "첨부파일"}
               </div>
               <input
                 accept="image/*"

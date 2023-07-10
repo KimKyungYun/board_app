@@ -15,10 +15,6 @@ export default function TopNavigation() {
   const [modal, setModal] = useState<boolean>(false);
   const [view, setView] = useState<boolean>(false);
 
-  const signOut = () => {
-    sessionStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-  };
   return (
     <nav className={styles.navbar}>
       {modal && (
@@ -42,7 +38,6 @@ export default function TopNavigation() {
             onClick={() => setView(!view)}
           />
         )}
-
         <ul
           className={cn({
             [styles["navbar__links"]]: !isMobile,
@@ -74,6 +69,21 @@ export default function TopNavigation() {
               커뮤니티
             </Link>
           </li>
+          {location.pathname !== "/list" && (
+            <li>
+              <Link
+                to="/post"
+                className={cn({
+                  [styles.navbar__link]: true,
+                  [styles["navbar__link--clicked"]]:
+                    location.pathname === "/list",
+                })}
+                onClick={() => setView(false)}
+              >
+                글쓰기
+              </Link>
+            </li>
+          )}
           {!auth ? (
             <>
               {location.pathname !== "/login" && (
@@ -100,7 +110,7 @@ export default function TopNavigation() {
               )}
             </>
           ) : (
-            <li onClick={signOut}>
+            <li>
               <span
                 className={styles.navbar__link}
                 onClick={() => {
