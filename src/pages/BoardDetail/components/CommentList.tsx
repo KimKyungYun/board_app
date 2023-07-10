@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import CommentInput from "./CommentInput";
 import Loading from "components/common/Loading/Loading";
 import styles from "./Comment.module.scss";
-import { DateCounter } from "components/common/DateCounter/DateCounter";
+import { DateCounter } from "utils/hook/useDateCalculator";
 
 const eraseComment = (
   boardId: number,
@@ -54,7 +54,7 @@ export default function CommentList() {
         setToggle(false);
         setWritten(false);
         setIsLoading(false);
-      }, 250);
+      }, 100);
     };
     bringComments();
   }, [boardId, written, toggle]);

@@ -2,6 +2,7 @@ import { getAuth } from "store/store";
 import styles from "./Comment.module.scss";
 import { postComment } from "api/board";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 interface CommentData {
   id: number;
@@ -40,6 +41,7 @@ const setComment = (
 
 export default function CommentInput({ id, setWritten }: CommentData) {
   const auth = getAuth();
+  const [wordCount, setWordCount] = useState<number>(0);
 
   const {
     register,
@@ -64,11 +66,17 @@ export default function CommentInput({ id, setWritten }: CommentData) {
           <span className={styles["writing__form--title"]}>댓글 작성</span>
           <div className={styles["writing__form__container"]}>
             {auth ? (
-              <textarea
-                className={styles["writing__form--input"]}
-                placeholder="댓글을 입력해주세요."
-                {...register("content", { required: true })}
-              />
+              <>
+                <textarea
+                  className={styles["writing__form--input"]}
+                  placeholder="댓글을 입력해주세요."
+                  maxLength={255}
+                  {...register("content", {
+                    required: true,
+                    onChange: (e) => setWordCount(e.target.value.length),
+                  })}
+                />
+              </>
             ) : (
               <textarea
                 className={styles["writing__form--input"]}
@@ -80,10 +88,14 @@ export default function CommentInput({ id, setWritten }: CommentData) {
               className={styles["writing__form--button"]}
               type="submit"
               disabled={!isValid || !auth}
+              onClick={() => setWordCount(0)}
             >
               댓글 쓰기
             </button>
           </div>
+          <span className={styles["writing__form--count"]}>
+            {wordCount}/255
+          </span>
         </label>
       </form>
     </div>

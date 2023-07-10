@@ -29,7 +29,6 @@ const usePost = (files: any) => {
         formData.append("images", files[i]);
       }
     }
-    // formData.append("images", files);
     formData.append("request", requestBlob);
     console.log(files);
 
@@ -42,7 +41,6 @@ const usePost = (files: any) => {
           },
         })
         .then((response) => {
-          console.log(response.data);
           navigate("/list");
         })
         .catch((error) => {
@@ -57,7 +55,6 @@ const usePost = (files: any) => {
 export default function Post() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [files, setFiles] = useState<any>();
-  const [textlength, setTextLength] = useState<number>(0);
   const navigate = useNavigate();
 
   const {
@@ -98,11 +95,7 @@ export default function Post() {
               className={styles["form__content--input"]}
               placeholder="내용을 입력해주세요."
               {...register("content", { required: true })}
-              onChange={(e) => {
-                setTextLength(e.target.value.length);
-              }}
             />
-            <span className={styles['form__content--length']}>{textlength}/255</span>
             <div className={styles.form__preview}>
               <label htmlFor="file" className={styles["form__preview--label"]}>
                 파일찾기

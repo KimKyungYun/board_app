@@ -8,8 +8,22 @@
   min-height: 100vh;
 }
 
+.toboard {
+  margin-top: 100px;
+  width: 70%;
+  text-decoration: none;
+  color: #666666;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+
+  &:hover {
+    color: #99ccff;
+  }
+}
+
 .detail {
-  margin-top: 120px;
+  margin-top: 40px;
   width: 60%;
   height: 100%;
   display: flex;
@@ -29,8 +43,11 @@
     font-weight: 600;
 
     &--icon {
-      width: 30px;
-      filter: opacity(0.5) drop-shadow(0 0 0 #0256ab);
+      width: 20px;
+      background-color: #0256ab;
+      padding: 2px;
+      margin-right: 5px;
+      border-radius: 100%;
     }
   }
 
@@ -62,6 +79,7 @@
   &__content {
     height: 100%;
     font-size: 20 px;
+    word-break: break-all;
     white-space: pre-wrap;
   }
 

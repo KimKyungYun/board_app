@@ -82,21 +82,29 @@
     }
   }
 }
+.write {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 
-.write_button {
-  width: 100px;
-  height: 40px;
-  border: none;
-  background-color: #99ccff;
-  border-radius: 15px;
-  color: #ffffff;
-  float: right;
-  margin-top: 40px;
-  cursor: pointer;
+  &__button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    // background: linear-gradient(to bottom, #0f2337, #215586, #296aa7);
 
-  &:hover {
-    transition: 500ms;
-    background-color: #1976d3;
-    color: #eeeeee;
+    background-color: #215586;
+    border-radius: 15px;
+    color: #ffffff;
+    margin-top: 40px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #296aa7;
+      color: #eeeeee;
+    }
+    @include media.media-breakpoint-down(mobile) {
+      margin-top: 10px;
+    }
   }
 }

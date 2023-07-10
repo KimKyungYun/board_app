@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_PATH } from "config/constants";
 
 const boardApi = axios.create({
-  baseURL: `http://43.202.86.32/board`,
+  baseURL: `http://${API_PATH}/board`,
   timeout: 2000,
 });
 

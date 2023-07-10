@@ -3,7 +3,7 @@ import Pagination from "components/common/Pagination";
 import styles from "./BoardList.module.scss";
 import { Link } from "react-router-dom";
 import { getAllBoard } from "api/board";
-import { DateCounter } from "components/common/DateCounter/DateCounter";
+import { DateCounter } from "utils/hook/useDateCalculator";
 import Loading from "components/common/Loading/Loading";
 
 export default function BoardList() {
@@ -58,7 +58,7 @@ export default function BoardList() {
         </ul>
         <div className={styles.write}>
           <Link to="/post">
-            <button type="button" className={styles.write_button}>
+            <button type="button" className={styles.write__button}>
               글쓰기
             </button>
           </Link>

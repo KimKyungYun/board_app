@@ -1,3 +1,5 @@
+@use "src/utils/styles/mediaQuery" as media;
+
 .content {
   display: flex;
   flex-direction: column;
@@ -37,6 +39,9 @@
         outline: 1px solid #77bbff;
       }
     }
+    &--count {
+      color: #c4c4c4;
+    }
 
     &--button {
       border-radius: 5px;
@@ -44,12 +49,12 @@
       width: 10%;
       margin-top: 10px;
       height: 70px;
-      background-color: #99ccff;
+      background: linear-gradient(to bottom, #15314d, #215586, #296aa7);
       color: #ffffff;
       cursor: pointer;
 
       &:hover {
-        background-color: #77bbff;
+        background: linear-gradient(to bottom, #07111a, #183f62, #205282);
       }
     }
   }
@@ -80,7 +85,8 @@
   }
   &__content {
     width: 100%;
-
+    white-space: pre-wrap;
+    word-break: break-all;
     &--text {
       margin-right: 5px;
     }
@@ -91,7 +97,7 @@
       background-color: transparent;
       font-size: 18px;
       font-weight: 900;
-      color: #99ccff;
+      color: #183f62;
       cursor: pointer;
 
       &:hover {

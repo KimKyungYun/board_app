@@ -8,37 +8,15 @@ import Loading from "components/common/Loading/Loading";
 import CommentList from "./components/CommentList";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "store/store";
-import { deleteBoard } from "api/board";
-
-const controlBoard = (boardId: number) => {
-  const navigate = useNavigate();
-  const eraseBoard = async () => {
-    const accessToken = sessionStorage.getItem("accessToken");
-    const header = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    const submitData = {
-      boardId: boardId,
-      headers: header,
-    };
-    try {
-      await deleteBoard(submitData);
-      navigate("/list");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  return eraseBoard;
-};
+import Modal from "components/common/Modal/Modal";
+import { createPortal } from "react-dom";
 
 export default function BoardDetail() {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [modal, setModal] = useState<boolean>(false);
-  const auth = getAuth();
   const [userId, setUserId] = useState<string | null>();
+  const auth = getAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,26 +33,22 @@ export default function BoardDetail() {
     getDetail();
   }, []);
 
-  const eraseBoard = controlBoard(data?.id);
-
   return (
     <div className={styles.content}>
-      {modal && (
-        <div className={styles.modal}>
-          <div className={styles.modal__box}>
-            <span>삭제하시겠습니까?</span>
-            <button onClick={eraseBoard}>네</button>
-            <button
-              onClick={() => {
-                setModal(false);
-              }}
-            >
-              아니오
-            </button>
-          </div>
-        </div>
-      )}
+      <span onClick={() => window.history.back()} className={styles.toboard}>
+        {"< 게시판으로"}
+      </span>
       {isLoading && <Loading />}
+      {modal &&
+        createPortal(
+          <Modal
+            title="게시물 삭제하기"
+            content="삭제하시겠습니까?"
+            isOpen={setModal}
+            boardId={data?.id}
+          />,
+          document.body
+        )}
       {data && (
         <div className={styles.detail}>
           <div className={styles.detail__container}>

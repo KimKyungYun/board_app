@@ -7,6 +7,7 @@ import cn from "utils/ts/className";
 import { useFormContext } from "react-hook-form";
 import { SignUpFormData } from "../static/signUp";
 import { checkIdDuplicate } from "api/user";
+import IdIcon from "assets/png/login_logo.png";
 
 const useIdCheckServer = (id: string) => {
   const { status } = useQuery(
@@ -50,7 +51,6 @@ export default function IdInput() {
   return (
     <div className={styles.form__form}>
       <label className={styles.form__label} htmlFor="id-input">
-        아이디
         <div className={styles.form__error} role="alert">
           <ErrorIcon
             className={cn({
@@ -62,24 +62,27 @@ export default function IdInput() {
           {errors.id?.message}
         </div>
       </label>
-      <input
-        placeholder="아이디를 입력하세요"
-        id="id-input"
-        className={cn({
-          [styles.form__input]: true,
-          [styles["form__input--id"]]: true,
-          [styles["form__input--error"]]: errors?.id !== undefined,
-        })}
-        // TODO: 아이디 중복확인 기능
-        {...register("id", {
-          required: ERROR_MESSAGE.id,
-          validate: {
-            checkValid: (val) =>
-              val === currentCheckedId || "아이디 중복확인을 해주세요.",
-            checkLoading: () => status !== "loading" || "중복 확인중입니다.",
-          },
-        })}
-      />
+      <div className={styles.form__container}>
+        <img src={IdIcon} alt="" className={styles["form__logo"]} />
+        <input
+          placeholder="아이디를 입력하세요"
+          id="id-input"
+          className={cn({
+            [styles.form__input]: true,
+            [styles["form__input--id"]]: true,
+            [styles["form__input--error"]]: errors?.id !== undefined,
+          })}
+          // TODO: 아이디 중복확인 기능
+          {...register("id", {
+            required: ERROR_MESSAGE.id,
+            validate: {
+              checkValid: (val) =>
+                val === currentCheckedId || "아이디 중복확인을 해주세요.",
+              checkLoading: () => status !== "loading" || "중복 확인중입니다.",
+            },
+          })}
+        />
+      </div>
       <button
         type="button"
         className={cn({

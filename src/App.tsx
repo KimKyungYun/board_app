@@ -9,6 +9,7 @@ import Login from "./pages/Auth/Login";
 import BoardDetail from "pages/BoardDetail";
 import AuthRoute from "components/Auth/AuthRoute";
 import Modify from "pages/Modify";
+
 function App() {
   return (
     <Suspense fallback={<div />}>

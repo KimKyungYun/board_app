@@ -8,6 +8,7 @@ import { useState } from "react";
 import { login } from "api/user";
 import User from "assets/png/login_logo.png";
 import PassWord from "assets/png/password_logo.png";
+import JKLogo from "assets/png/company.png";
 
 interface LoginFormInput {
   username: string;
@@ -65,11 +66,12 @@ export default function Login() {
     <div className={styles.content}>
       <div className={styles.form}>
         <form className={styles.loginform} onSubmit={handleSubmit(submitLogin)}>
-          <AuthDetail
+          <img src={JKLogo} alt="" className={styles.loginform__logo} />
+          {/* <AuthDetail
             name="로그인하기"
             first="게시판에 게시글을 작성하시려면"
             second="로그인하세요"
-          />
+          /> */}
           <div className={styles.error}>
             {errorMsg && <ErrorIcon aria-hidden />}
             {errorMsg}

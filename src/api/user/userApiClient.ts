@@ -1,7 +1,8 @@
 import axios, { AxiosError } from "axios";
+import { API_PATH } from "config/constants";
 
 const userApi = axios.create({
-  baseURL: `http://43.202.86.32/user`,
+  baseURL: `http://${API_PATH}/user`,
   timeout: 2000,
 });
 
