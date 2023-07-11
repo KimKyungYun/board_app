@@ -14,6 +14,7 @@ export default function Home() {
   const auth = getAuth();
   const { isMobile } = useMediaQuery();
   const [currentPage, setCurrentPage] = useState<number>(0);
+  
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (isMobile) {

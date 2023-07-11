@@ -7,6 +7,7 @@ interface BoardList {
   currentPage: number;
   paginate: React.Dispatch<React.SetStateAction<number>>;
 }
+
 export default function Pagination({
   totalPage,
   currentPage,

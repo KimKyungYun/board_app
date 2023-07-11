@@ -12,7 +12,7 @@
   z-index: 999;
 
   @include media.media-breakpoint-down(mobile) {
-    position: static;
+    position: fixed;
     height: 70px;
   }
 

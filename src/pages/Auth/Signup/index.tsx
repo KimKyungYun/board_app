@@ -7,6 +7,7 @@ import { SignUpFormData } from "./static/signUp";
 import { useNavigate } from "react-router-dom";
 import { register } from "api/user";
 import JKLogo from "assets/png/company.png";
+import { useState } from "react";
 
 const useSignUp = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const useSignUp = () => {
   return signup;
 };
 export default function Signup() {
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const methods = useForm<SignUpFormData>({
     mode: "onChange",
     defaultValues: {
@@ -51,10 +53,10 @@ export default function Signup() {
           onSubmit={handleSubmit(signup)}
         >
           <span className={styles.form__title}>
-            <img src={JKLogo} alt="" className={styles['form__title--logo']}/>
+            <img src={JKLogo} alt="" className={styles["form__title--logo"]} />
             회원가입
           </span>
-          <IdInput />
+          <IdInput errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
           <PasswordInput />
           <PasswordCheckInput />
           <div className={styles.form__submit}>
@@ -65,7 +67,7 @@ export default function Signup() {
             </span>
             <button
               className={styles["form__submit--signup"]}
-              disabled={!isValid || !isDirty}
+              disabled={!isValid || !isDirty || errorMsg !== ""}
             >
               동의하고 가입하기
             </button>

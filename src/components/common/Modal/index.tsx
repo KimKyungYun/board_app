@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./AuthModal.module.scss";
+import styles from "./Modal.module.scss";
 import Detail from "components/Auth/Detail";
-import { clearAuth } from "store/store";
 
 interface ModalData {
   title: string;
   content: string;
   isOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  path: string;
 }
 
-export default function AuthModal({ title, content, isOpen }: ModalData) {
+export default function Modal({ title, content, isOpen, path }: ModalData) {
   const navigate = useNavigate();
-
   return (
     <div className={styles.modal}>
       <div className={styles.modal__popup}>
@@ -21,11 +20,7 @@ export default function AuthModal({ title, content, isOpen }: ModalData) {
           <button
             className={styles["modal__button--access"]}
             type="button"
-            onClick={() => {
-              clearAuth();
-              isOpen(false);
-              navigate("/");
-            }}
+            onClick={() => navigate(`/${path}`)}
           >
             네
           </button>

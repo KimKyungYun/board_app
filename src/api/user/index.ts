@@ -1,10 +1,4 @@
-import {
-  LoginParams,
-  RegisterParams,
-  User,
-  LoginResponse,
-  CheckIdDuplicateParams,
-} from "./entity";
+import { LoginParams, RegisterParams, User, LoginResponse } from "./entity";
 import userApi from "./userApiClient";
 
 export const register = (param: RegisterParams) =>
@@ -15,5 +9,7 @@ export const login = async (param: LoginParams) => {
   return data;
 };
 
-export const checkIdDuplicate = (param: CheckIdDuplicateParams) =>
-  userApi.get<User>(`/info?userId=${param.account}`);
+export const checkIdDuplicate = (param: string) => {
+  const data = userApi.get<User>(`/info?userId=${param}`);
+  return data;
+};

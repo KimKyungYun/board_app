@@ -3,7 +3,7 @@ import CompanyLogo from "assets/png/company_logo.png";
 import styles from "./TopNavigation.module.scss";
 import cn from "utils/ts/className";
 import { getAuth } from "store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMediaQuery from "utils/hook/useMediaQuery";
 import DropDown from "assets/Icon/dropdown.png";
 import AuthModal from "components/Auth/AuthModal";
@@ -15,6 +15,9 @@ export default function TopNavigation() {
   const [modal, setModal] = useState<boolean>(false);
   const [view, setView] = useState<boolean>(false);
 
+  useEffect(() => {
+    getAuth();
+  }, [auth]);
   return (
     <nav className={styles.navbar}>
       {modal && (
@@ -69,21 +72,6 @@ export default function TopNavigation() {
               커뮤니티
             </Link>
           </li>
-          {location.pathname !== "/list" && (
-            <li>
-              <Link
-                to="/post"
-                className={cn({
-                  [styles.navbar__link]: true,
-                  [styles["navbar__link--clicked"]]:
-                    location.pathname === "/list",
-                })}
-                onClick={() => setView(false)}
-              >
-                글쓰기
-              </Link>
-            </li>
-          )}
           {!auth ? (
             <>
               {location.pathname !== "/login" && (

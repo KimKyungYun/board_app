@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { getAllBoard } from "api/board";
 import { DateCounter } from "utils/hook/useDateCalculator";
 import Loading from "components/common/Loading/Loading";
-
+import { createPortal } from "react-dom";
 export default function BoardList() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [list, setList] = useState<any>();
@@ -26,7 +26,7 @@ export default function BoardList() {
 
   return (
     <div className={styles.content}>
-      {isLoading && <Loading />}
+      {isLoading && createPortal(<Loading />, document.body)}
       <div className={styles.board}>
         <div className={styles.board__title}>커뮤니티</div>
         <div className={styles.board__index}>

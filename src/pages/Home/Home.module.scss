@@ -15,9 +15,11 @@
     display: none;
   }
 }
+
 .outer {
   height: 100vh;
 }
+
 .image1 {
   background-attachment: fixed;
   background-size: cover;
@@ -44,6 +46,7 @@
     height: 100vh;
   }
 }
+
 .image3 {
   background-attachment: fixed;
   background-size: cover;
@@ -84,7 +87,7 @@
     font-size: 40px;
     height: 100vh;
   }
-
+ 
   &__last {
     height: 250vh;
     display: flex;
@@ -146,6 +149,7 @@
     }
   }
 }
+
 .explain {
   height: 200vh;
   display: flex;
@@ -160,6 +164,7 @@
     font-size: 30px;
   }
 }
+
 .img {
   border-radius: 10px;
 

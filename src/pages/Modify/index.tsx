@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 import styles from "./Modify.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { getBoardDetail } from "api/board";
 import Loading from "components/common/Loading/Loading";
+import { createPortal } from "react-dom";
+import Modal from "components/common/Modal";
+import { modifyBoard } from "api/board";
 
 const usePost = (id: number, files: any, title: string, content: string) => {
   const navigate = useNavigate();
   const modifying = () => {
     const accessToken = sessionStorage.getItem("accessToken");
-    // const headers = {
-    //   Authorization: `Bearer ${accessToken}`,
-    //   "Content-Type": "multipart/form-data;boundary",
-    // };
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
+      },
+    };
     const requestObject = {
       id: id,
       title: title,
@@ -30,23 +34,15 @@ const usePost = (id: number, files: any, title: string, content: string) => {
     }
     formData.append("request", requestBlob);
 
-    const postBoard = async () => {
-      await axios
-        .put("http://43.202.86.32/board", formData, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data;",
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          navigate("/list");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    const editBoard = async () => {
+      try {
+        await modifyBoard({ formData, headers });
+        navigate("/list");
+      } catch (error) {
+        console.log(error);
+      }
     };
-    postBoard();
+    editBoard();
   };
 
   return modifying;
@@ -55,10 +51,10 @@ export default function Modify() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [data, setData] = useState<any>(null);
+  const [modal, setModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [fileName, setFileName] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<Array<string>>();
   const [files, setFiles] = useState<any>();
-  const navigate = useNavigate();
 
   const { handleSubmit } = useForm();
 
@@ -77,9 +73,29 @@ export default function Modify() {
     getDetail();
   }, []);
 
+  useEffect(() => {
+    const names = [];
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        names.push(files[i].name);
+      }
+    }
+    setFileName(names);
+  }, [files]);
+
   return (
     <div className={styles.content}>
       {isLoading && <Loading />}
+      {modal &&
+        createPortal(
+          <Modal
+            title="게시물 작성"
+            content="작성하던 게시물을 취소하시겠습니까?"
+            isOpen={setModal}
+            path="list"
+          />,
+          document.body
+        )}
       <div className={styles.post}>
         <span className={styles.post__title}>게시글 수정</span>
         <form
@@ -110,9 +126,7 @@ export default function Modify() {
               <label htmlFor="file" className={styles["form__preview--label"]}>
                 파일찾기
               </label>
-              <div className={styles["form__preview--name"]}>
-                {fileName ? fileName : "첨부파일"}
-              </div>
+              <div className={styles["form__preview--name"]}>{fileName}</div>
               <input
                 accept="image/*"
                 multiple
@@ -120,7 +134,6 @@ export default function Modify() {
                 type="file"
                 className={styles["form__preview--input"]}
                 onChange={(e) => {
-                  setFileName(e.target.value);
                   setFiles(e.target.files);
                 }}
               />
@@ -137,7 +150,7 @@ export default function Modify() {
             <button
               type="button"
               className={styles["form__button--cancel"]}
-              onClick={() => navigate("/list")}
+              onClick={() => setModal(true)}
             >
               취소
             </button>

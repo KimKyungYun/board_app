@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const checkEnvVar = (name: string) => {
   const envVar = process.env[name];
   if (!envVar) {

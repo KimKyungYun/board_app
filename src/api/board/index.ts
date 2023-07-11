@@ -26,13 +26,13 @@ export const getAllBoard = (param: number) => {
   return data;
 };
 
-export const postBoard = (param: Blob, headers: object) => {
-  const data = boardApi.post<BoardInfoParams>("", param, headers);
+export const postBoard = (param: PostInfoParams) => {
+  const data = boardApi.post("", param.formData, param.headers);
   return data;
 };
 
 export const modifyBoard = (param: PostInfoParams) => {
-  const data = boardApi.put<PostInfoParams>("");
+  const data = boardApi.put("", param.formData, param.headers);
   return data;
 };
 

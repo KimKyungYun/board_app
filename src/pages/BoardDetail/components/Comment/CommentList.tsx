@@ -6,7 +6,7 @@ import Loading from "components/common/Loading/Loading";
 import styles from "./Comment.module.scss";
 import { DateCounter } from "utils/hook/useDateCalculator";
 
-const eraseComment = (
+const useEraseComment = (
   boardId: number,
   commentId: number,
   setToggle: React.Dispatch<React.SetStateAction<boolean>>
@@ -43,7 +43,7 @@ export default function CommentList() {
   const userId = sessionStorage.getItem("userId");
 
   const { handleSubmit } = useForm();
-  const withdrawComment = eraseComment(boardId, deleteId, setToggle);
+  const withdrawComment = useEraseComment(boardId, deleteId, setToggle);
 
   useEffect(() => {
     const bringComments = async () => {

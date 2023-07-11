@@ -11,7 +11,7 @@ interface CommentData {
 interface CommentSentence {
   content: string;
 }
-const setComment = (
+const useComment = (
   id: number,
   reset: Function,
   setWritten: React.Dispatch<React.SetStateAction<boolean>>
@@ -54,7 +54,7 @@ export default function CommentInput({ id, setWritten }: CommentData) {
       content: "",
     },
   });
-  const submitComment = setComment(id, reset, setWritten);
+  const submitComment = useComment(id, reset, setWritten);
 
   return (
     <div className={styles.writing}>

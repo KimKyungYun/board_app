@@ -12,8 +12,8 @@ export interface BoardAllparams {
 }
 
 export interface PostInfoParams {
-  images: object;
-  request: object;
+  formData: FormData;
+  headers: object;
 }
 
 export interface BoardDeleteParams {

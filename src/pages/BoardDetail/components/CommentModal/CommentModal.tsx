@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./Modal.module.scss";
-import AuthDetail from "components/Auth/AuthDetail";
+import styles from "./CommentModal.module.scss";
+import Detail from "components/Auth/Detail";
 import { deleteBoard } from "api/board";
 
 interface ModalData {
@@ -34,13 +34,18 @@ const controlBoard = (boardId: number) => {
   return eraseBoard;
 };
 
-export default function Modal({ title, content, isOpen, boardId }: ModalData) {
+export default function CommentModal({
+  title,
+  content,
+  isOpen,
+  boardId,
+}: ModalData) {
   const deleteBoard = controlBoard(boardId);
   return (
     <div className={styles.modal}>
       <div className={styles.modal__popup}>
         <div className={styles.modal__message}></div>
-        <AuthDetail name={title} first={content} second="" />
+        <Detail name={title} first={content} second="" />
         <div className={styles.modal__button}>
           <button
             className={styles["modal__button--access"]}

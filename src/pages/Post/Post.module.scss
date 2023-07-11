@@ -5,12 +5,21 @@
   justify-content: center;
   min-height: 100vh;
 }
+.error {
+  display: none;
+
+  &--active {
+    margin-left: 20px;
+    color: #ff7f23;
+  }
+}
+
 .post {
   width: 80%;
   margin-top: 120px;
 
   @include media.media-breakpoint-down(mobile) {
-    margin-top: 20px;
+    margin-top: 100px;
   }
 
   &__title {
@@ -101,9 +110,10 @@
       border: none;
       background: linear-gradient(to right, #11283e, #235788, #265e92);
       color: #ffffff;
+      cursor: pointer;
 
       &:hover {
-        background-color: #59acff;
+        background: linear-gradient(to right, #07121c, #163755, #1c456c);
       }
     }
 
@@ -140,6 +150,10 @@
       border: 1px solid #dddddd;
       border-radius: 5px;
       color: #999999;
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-x: hidden;
+      overflow-y: scroll;
     }
 
     &--label {

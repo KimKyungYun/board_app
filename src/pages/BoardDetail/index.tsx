@@ -1,14 +1,13 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import styles from "./BoardDetail.module.scss";
 import { useEffect, useState } from "react";
 import { getBoardDetail } from "api/board";
 import User from "assets/png/login_logo.png";
 import ViewCount from "assets/png/view_count.png";
 import Loading from "components/common/Loading/Loading";
-import CommentList from "./components/CommentList";
+import CommentList from "./components/Comment/CommentList";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "store/store";
-import Modal from "components/common/Modal/Modal";
+import Modal from "pages/BoardDetail/components/CommentModal/CommentModal";
 import { createPortal } from "react-dom";
 
 export default function BoardDetail() {
@@ -28,7 +27,6 @@ export default function BoardDetail() {
       setData(data.data);
       setUserId(sessionStorage.getItem("userId"));
       setIsLoading(false);
-      console.log(data);
     };
     getDetail();
   }, []);

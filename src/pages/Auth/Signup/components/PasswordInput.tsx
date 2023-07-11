@@ -7,6 +7,7 @@ import { ERROR_MESSAGE } from "pages/Auth/Signup/static/signUp";
 import styles from "../Signup.module.scss";
 import { SignUpFormData } from "../static/signUp";
 import PasswordLogo from "assets/png/signup__password.png";
+
 export default function PasswordInput() {
   const {
     register,
