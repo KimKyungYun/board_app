@@ -1,9 +1,9 @@
 import styles from "./Home.module.scss";
-import List from "assets/images/list.jpg";
-import Detail from "assets/images/detail.jpg";
-import Write from "assets/images/write.jpg";
-import Login from "assets/images/login.jpg";
-import Signup from "assets/images/signup.jpg";
+import List from "assets/pages/list.png";
+import Detail from "assets/pages/detail.png";
+import Write from "assets/pages/write.png";
+import Login from "assets/pages/login.png";
+import Signup from "assets/pages/sign_up.png";
 import { useEffect, useState } from "react";
 import cn from "utils/ts/className";
 import useMediaQuery from "utils/hook/useMediaQuery";
@@ -14,24 +14,22 @@ export default function Home() {
   const auth = getAuth();
   const { isMobile } = useMediaQuery();
   const [currentPage, setCurrentPage] = useState<number>(0);
-  
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (isMobile) {
-        setCurrentPage(Math.trunc(window.scrollY / window.innerHeight));
-      } else {
-        setCurrentPage(Math.trunc(window.scrollY / (window.innerHeight * 1.5)));
-      }
+      isMobile
+        ? setCurrentPage(Math.trunc(window.scrollY / window.innerHeight))
+        : setCurrentPage(
+            Math.trunc(window.scrollY / (window.innerHeight * 1.5))
+          );
     });
     return () => {
       window.removeEventListener("scroll", () => {
-        if (isMobile) {
-          setCurrentPage(Math.trunc(window.scrollY / window.innerHeight));
-        } else {
-          setCurrentPage(
-            Math.trunc(window.scrollY / (window.innerHeight * 1.5))
-          );
-        }
+        isMobile
+          ? setCurrentPage(Math.trunc(window.scrollY / window.innerHeight))
+          : setCurrentPage(
+              Math.trunc(window.scrollY / (window.innerHeight * 1.5))
+            );
       });
     };
   }, [isMobile]);
