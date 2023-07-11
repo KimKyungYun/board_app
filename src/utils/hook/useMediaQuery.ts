@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-const MOBILE_MEDIA_QUERY = "(max-width: 720px)";
+const MOBILE_MEDIA_QUERY = '(max-width: 720px)';
 
 const useMediaQuery = () => {
   const [matches, setMatches] = useState(
-    () => window.matchMedia(MOBILE_MEDIA_QUERY).matches
+    () => window.matchMedia(MOBILE_MEDIA_QUERY).matches,
   );
   const matchMediaRef = useRef<MediaQueryList | null>(null);
 
@@ -14,10 +14,10 @@ const useMediaQuery = () => {
     function handleChange() {
       setMatches(window.matchMedia(MOBILE_MEDIA_QUERY).matches);
     }
-    matchMediaRef.current.addEventListener("change", handleChange);
+    matchMediaRef.current.addEventListener('change', handleChange);
 
     return () => {
-      matchMediaRef.current?.removeEventListener("change", handleChange);
+      matchMediaRef.current?.removeEventListener('change', handleChange);
     };
   }, []);
 
