@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/board_app/static/css/main.25065574.css",
+    "main.js": "/board_app/static/js/main.a4090d33.js",
+    "static/js/787.baa4136b.chunk.js": "/board_app/static/js/787.baa4136b.chunk.js",
+    "static/media/conversation2.jpeg": "/board_app/static/media/conversation2.db891313c35a9459765b.jpeg",
+    "static/media/writing.jpeg": "/board_app/static/media/writing.b2dab3ab5b1940db6e37.jpeg",
+    "static/media/conversation.jpeg": "/board_app/static/media/conversation.45cc7615873a058e8028.jpeg",
+    "static/media/notice-board.jpeg": "/board_app/static/media/notice-board.0ede974037f8796fbb67.jpeg",
+    "static/media/SUIT-Bold.woff2": "/board_app/static/media/SUIT-Bold.ca3955de121069bee849.woff2",
+    "static/media/SUIT-Medium.woff2": "/board_app/static/media/SUIT-Medium.54069a7219668e5cd162.woff2",
+    "static/media/SUIT-Regular.woff2": "/board_app/static/media/SUIT-Regular.fe031e79757056ed638e.woff2",
+    "static/media/sign_up.png": "/board_app/static/media/sign_up.19d0e473ededc26809b7.png",
+    "static/media/detail.png": "/board_app/static/media/detail.a14a207feed83436c811.png",
+    "static/media/login.png": "/board_app/static/media/login.9c66fc26ea695991f72d.png",
+    "static/media/write.png": "/board_app/static/media/write.2cc1c01f8a39d804aa9d.png",
+    "static/media/loading_spinner.gif": "/board_app/static/media/loading_spinner.2546f0bbc2788c1fc9cb.gif",
+    "static/media/dropdown.png": "/board_app/static/media/dropdown.f5b9298bb48ae7dc0b5e.png",
+    "static/media/list.png": "/board_app/static/media/list.6774e1017c7d6bcdef5c.png",
+    "index.html": "/board_app/index.html",
+    "static/media/error.svg": "/board_app/static/media/error.5817944ecf6fa179bfaae0127944eaac.svg",
+    "static/media/arrow_icon.svg": "/board_app/static/media/arrow_icon.da2e7b8645c0a1a3d8d9e3787517dd25.svg",
+    "main.25065574.css.map": "/board_app/static/css/main.25065574.css.map",
+    "main.a4090d33.js.map": "/board_app/static/js/main.a4090d33.js.map",
+    "787.baa4136b.chunk.js.map": "/board_app/static/js/787.baa4136b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.25065574.css",
+    "static/js/main.a4090d33.js"
+  ]
+}
